@@ -11,6 +11,17 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Image {
+  id              String  @id @default(cuid())
+  title           String  @default("")
+  alt             String  @default("")
+  image_id        String?
+  image_filesize  Int?
+  image_width     Int?
+  image_height    Int?
+  image_extension String?
+}
+
 model User {
   id        String    @id @default(cuid())
   name      String    @default("")
