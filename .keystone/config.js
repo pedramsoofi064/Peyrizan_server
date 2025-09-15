@@ -23,7 +23,7 @@ __export(keystone_exports, {
   default: () => keystone_default
 });
 module.exports = __toCommonJS(keystone_exports);
-var import_core3 = require("@keystone-6/core");
+var import_core4 = require("@keystone-6/core");
 
 // lists/Image.list.ts
 var import_core = require("@keystone-6/core");
@@ -71,7 +71,7 @@ var User_list_default = (0, import_core2.list)({
     password: (0, import_fields2.password)({ validation: { isRequired: true } }),
     // we can use this field to see what Posts this User has authored
     //   more on that in the Post list below
-    posts: (0, import_fields2.relationship)({ ref: "Post.author", many: true }),
+    // posts: relationship({ ref: "Post.author", many: true }),
     createdAt: (0, import_fields2.timestamp)({
       // this sets the timestamp to Date.now() when the user is first created
       defaultValue: { kind: "now" }
@@ -79,16 +79,34 @@ var User_list_default = (0, import_core2.list)({
   }
 });
 
+// lists/mainPageImage.list.ts
+var import_core3 = require("@keystone-6/core");
+var import_access3 = require("@keystone-6/core/access");
+var import_fields3 = require("@keystone-6/core/fields");
+var mainPageImage_list_default = (0, import_core3.list)({
+  ui: {
+    label: "\u062A\u0635\u0627\u0648\u06CC\u0631 \u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC",
+    description: "\u062A\u0645\u0627\u0645 \u062A\u0635\u0627\u0648\u06CC\u0631 \u0642\u0633\u0645\u062A \u0627\u0648\u0644 \u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC"
+  },
+  access: import_access3.allowAll,
+  fields: {
+    name: (0, import_fields3.text)(),
+    image: (0, import_fields3.relationship)({ ref: "Image", many: false })
+  }
+});
+
 // lists/index.ts
 var lists_default = {
   Image: Image_list_default,
-  User: User_list_default
+  User: User_list_default,
+  mainPageImage: mainPageImage_list_default
 };
 
 // schema.ts
 var lists = {
   Image: lists_default.Image,
-  User: lists_default.User
+  User: lists_default.User,
+  mainPageImage: lists_default.mainPageImage
   // Post: list({
   //   // WARNING
   //   //   for this starter project, anyone can create, query, update and delete anything
@@ -196,7 +214,7 @@ var session = (0, import_session.statelessSessions)({
 
 // keystone.ts
 var keystone_default = withAuth(
-  (0, import_core3.config)({
+  (0, import_core4.config)({
     db: {
       // we're using sqlite for the fastest startup experience
       //   for more information on what database might be appropriate for you

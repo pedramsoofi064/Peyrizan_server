@@ -12,14 +12,15 @@ generator client {
 }
 
 model Image {
-  id              String  @id @default(cuid())
-  title           String  @default("")
-  alt             String  @default("")
-  image_id        String?
-  image_filesize  Int?
-  image_width     Int?
-  image_height    Int?
-  image_extension String?
+  id                       String          @id @default(cuid())
+  title                    String          @default("")
+  alt                      String          @default("")
+  image_id                 String?
+  image_filesize           Int?
+  image_width              Int?
+  image_height             Int?
+  image_extension          String?
+  from_mainPageImage_image mainPageImage[] @relation("mainPageImage_image")
 }
 
 model User {
@@ -27,23 +28,14 @@ model User {
   name      String    @default("")
   email     String    @unique @default("")
   password  String
-  posts     Post[]    @relation("Post_author")
   createdAt DateTime? @default(now())
 }
 
-model Post {
-  id       String  @id @default(cuid())
-  title    String  @default("")
-  content  String  @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  author   User?   @relation("Post_author", fields: [authorId], references: [id])
-  authorId String? @map("author")
-  tags     Tag[]   @relation("Post_tags")
+model mainPageImage {
+  id      String  @id @default(cuid())
+  name    String  @default("")
+  image   Image?  @relation("mainPageImage_image", fields: [imageId], references: [id])
+  imageId String? @map("image")
 
-  @@index([authorId])
-}
-
-model Tag {
-  id    String @id @default(cuid())
-  name  String @default("")
-  posts Post[] @relation("Post_tags")
+  @@index([imageId])
 }

@@ -31,6 +31,7 @@ import AppList from "./lists/index";
 export const lists = {
   Image: AppList.Image,
   User: AppList.User,
+  mainPageImage: AppList.mainPageImage,
 
   // Post: list({
   //   // WARNING

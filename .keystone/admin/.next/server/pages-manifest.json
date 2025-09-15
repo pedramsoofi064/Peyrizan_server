@@ -2,6 +2,10 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
+  "/signin": "pages/signin.js",
   "/": "pages/index.js",
-  "/signin": "pages/signin.js"
+  "/main-page-images": "pages/main-page-images.js",
+  "/main-page-images/create": "pages/main-page-images/create.js",
+  "/main-page-images/[id]": "pages/main-page-images/[id].js",
+  "/images/[id]": "pages/images/[id].js"
 }
