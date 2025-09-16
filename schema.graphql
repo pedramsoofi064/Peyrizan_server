@@ -179,8 +179,8 @@ input UserCreateInput {
 
 type mainPageImage {
   id: ID!
-  name: String
-  image: Image
+  alt: String
+  image: ImageFieldOutput
 }
 
 input mainPageImageWhereUniqueInput {
@@ -192,24 +192,17 @@ input mainPageImageWhereInput {
   OR: [mainPageImageWhereInput!]
   NOT: [mainPageImageWhereInput!]
   id: IDFilter
-  name: StringFilter
-  image: ImageWhereInput
+  alt: StringFilter
 }
 
 input mainPageImageOrderByInput {
   id: OrderDirection
-  name: OrderDirection
+  alt: OrderDirection
 }
 
 input mainPageImageUpdateInput {
-  name: String
-  image: ImageRelateToOneForUpdateInput
-}
-
-input ImageRelateToOneForUpdateInput {
-  create: ImageCreateInput
-  connect: ImageWhereUniqueInput
-  disconnect: Boolean
+  alt: String
+  image: ImageFieldInput
 }
 
 input mainPageImageUpdateArgs {
@@ -218,13 +211,8 @@ input mainPageImageUpdateArgs {
 }
 
 input mainPageImageCreateInput {
-  name: String
-  image: ImageRelateToOneForCreateInput
-}
-
-input ImageRelateToOneForCreateInput {
-  create: ImageCreateInput
-  connect: ImageWhereUniqueInput
+  alt: String
+  image: ImageFieldInput
 }
 
 """

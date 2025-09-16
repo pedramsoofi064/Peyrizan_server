@@ -12,15 +12,14 @@ generator client {
 }
 
 model Image {
-  id                       String          @id @default(cuid())
-  title                    String          @default("")
-  alt                      String          @default("")
-  image_id                 String?
-  image_filesize           Int?
-  image_width              Int?
-  image_height             Int?
-  image_extension          String?
-  from_mainPageImage_image mainPageImage[] @relation("mainPageImage_image")
+  id              String  @id @default(cuid())
+  title           String  @default("")
+  alt             String  @default("")
+  image_id        String?
+  image_filesize  Int?
+  image_width     Int?
+  image_height    Int?
+  image_extension String?
 }
 
 model User {
@@ -32,10 +31,11 @@ model User {
 }
 
 model mainPageImage {
-  id      String  @id @default(cuid())
-  name    String  @default("")
-  image   Image?  @relation("mainPageImage_image", fields: [imageId], references: [id])
-  imageId String? @map("image")
-
-  @@index([imageId])
+  id              String  @id @default(cuid())
+  alt             String  @default("")
+  image_id        String?
+  image_filesize  Int?
+  image_width     Int?
+  image_height    Int?
+  image_extension String?
 }

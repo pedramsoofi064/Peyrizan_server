@@ -90,8 +90,12 @@ var mainPageImage_list_default = (0, import_core3.list)({
   },
   access: import_access3.allowAll,
   fields: {
-    name: (0, import_fields3.text)(),
-    image: (0, import_fields3.relationship)({ ref: "Image", many: false })
+    alt: (0, import_fields3.text)({
+      label: "\u0646\u0627\u0645 \u062A\u0635\u0648\u06CC\u0631"
+    }),
+    image: (0, import_fields3.image)({
+      storage: "main_images"
+    })
   }
 });
 
@@ -223,6 +227,21 @@ var keystone_default = withAuth(
       url: "file:./keystone.db"
     },
     storage: {
+      main_images: {
+        // Images that use this store will be stored on the local machine
+        kind: "local",
+        // This store is used for the image field type
+        type: "image",
+        // The URL that is returned in the Keystone GraphQL API
+        generateUrl: (path) => `/main/images${path}`,
+        // The route that will be created in Keystone's backend to serve the images
+        serverRoute: {
+          path: "/main/images"
+        },
+        // Set serverRoute to null if you don't want a route to be created in Keystone
+        // serverRoute: null
+        storagePath: "public/main/images"
+      },
       images: {
         // Images that use this store will be stored on the local machine
         kind: "local",

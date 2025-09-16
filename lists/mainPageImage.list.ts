@@ -23,7 +23,11 @@ export default list({
   },
   access: allowAll,
   fields: {
-    name: text(),
-    image: relationship({ ref: 'Image', many: false })
+    alt: text({
+      label: "نام تصویر"
+    }),
+    image: image({
+      storage: "main_images",
+    }),
   },
 });
