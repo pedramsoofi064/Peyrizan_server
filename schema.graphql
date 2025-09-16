@@ -215,6 +215,233 @@ input mainPageImageCreateInput {
   image: ImageFieldInput
 }
 
+type Project {
+  id: ID!
+  titleFa: String
+  titleEn: String
+  summaryFa: String
+  summaryEn: String
+  descriptionFa: String
+  descriptionEn: String
+  employerFa: String
+  employerEn: String
+  advisorFa: String
+  advisorEn: String
+  locationFa: String
+  locationEn: String
+  progressPercentage: Int
+  status: String
+  startDate: DateTime
+  endDate: DateTime
+  images(where: ProjectImageWhereInput! = {}, orderBy: [ProjectImageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProjectImageWhereUniqueInput): [ProjectImage!]
+  imagesCount(where: ProjectImageWhereInput! = {}): Int
+}
+
+input ProjectWhereUniqueInput {
+  id: ID
+}
+
+input ProjectWhereInput {
+  AND: [ProjectWhereInput!]
+  OR: [ProjectWhereInput!]
+  NOT: [ProjectWhereInput!]
+  id: IDFilter
+  titleFa: StringFilter
+  titleEn: StringFilter
+  summaryFa: StringFilter
+  summaryEn: StringFilter
+  descriptionFa: StringFilter
+  descriptionEn: StringFilter
+  employerFa: StringFilter
+  employerEn: StringFilter
+  advisorFa: StringFilter
+  advisorEn: StringFilter
+  locationFa: StringFilter
+  locationEn: StringFilter
+  progressPercentage: IntNullableFilter
+  status: StringNullableFilter
+  startDate: DateTimeFilter
+  endDate: DateTimeNullableFilter
+  images: ProjectImageManyRelationFilter
+}
+
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntNullableFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: StringNullableFilter
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: DateTimeFilter
+}
+
+input ProjectImageManyRelationFilter {
+  every: ProjectImageWhereInput
+  some: ProjectImageWhereInput
+  none: ProjectImageWhereInput
+}
+
+input ProjectOrderByInput {
+  id: OrderDirection
+  titleFa: OrderDirection
+  titleEn: OrderDirection
+  summaryFa: OrderDirection
+  summaryEn: OrderDirection
+  descriptionFa: OrderDirection
+  descriptionEn: OrderDirection
+  employerFa: OrderDirection
+  employerEn: OrderDirection
+  advisorFa: OrderDirection
+  advisorEn: OrderDirection
+  locationFa: OrderDirection
+  locationEn: OrderDirection
+  progressPercentage: OrderDirection
+  status: OrderDirection
+  startDate: OrderDirection
+  endDate: OrderDirection
+}
+
+input ProjectUpdateInput {
+  titleFa: String
+  titleEn: String
+  summaryFa: String
+  summaryEn: String
+  descriptionFa: String
+  descriptionEn: String
+  employerFa: String
+  employerEn: String
+  advisorFa: String
+  advisorEn: String
+  locationFa: String
+  locationEn: String
+  progressPercentage: Int
+  status: String
+  startDate: DateTime
+  endDate: DateTime
+  images: ProjectImageRelateToManyForUpdateInput
+}
+
+input ProjectImageRelateToManyForUpdateInput {
+  disconnect: [ProjectImageWhereUniqueInput!]
+  set: [ProjectImageWhereUniqueInput!]
+  create: [ProjectImageCreateInput!]
+  connect: [ProjectImageWhereUniqueInput!]
+}
+
+input ProjectUpdateArgs {
+  where: ProjectWhereUniqueInput!
+  data: ProjectUpdateInput!
+}
+
+input ProjectCreateInput {
+  titleFa: String
+  titleEn: String
+  summaryFa: String
+  summaryEn: String
+  descriptionFa: String
+  descriptionEn: String
+  employerFa: String
+  employerEn: String
+  advisorFa: String
+  advisorEn: String
+  locationFa: String
+  locationEn: String
+  progressPercentage: Int
+  status: String
+  startDate: DateTime
+  endDate: DateTime
+  images: ProjectImageRelateToManyForCreateInput
+}
+
+input ProjectImageRelateToManyForCreateInput {
+  create: [ProjectImageCreateInput!]
+  connect: [ProjectImageWhereUniqueInput!]
+}
+
+type ProjectImage {
+  id: ID!
+  alt: String
+  file: ImageFieldOutput
+  sortOrder: Int
+  project: Project
+}
+
+input ProjectImageWhereUniqueInput {
+  id: ID
+}
+
+input ProjectImageWhereInput {
+  AND: [ProjectImageWhereInput!]
+  OR: [ProjectImageWhereInput!]
+  NOT: [ProjectImageWhereInput!]
+  id: IDFilter
+  alt: StringFilter
+  sortOrder: IntNullableFilter
+  project: ProjectWhereInput
+}
+
+input ProjectImageOrderByInput {
+  id: OrderDirection
+  alt: OrderDirection
+  sortOrder: OrderDirection
+}
+
+input ProjectImageUpdateInput {
+  alt: String
+  file: ImageFieldInput
+  sortOrder: Int
+  project: ProjectRelateToOneForUpdateInput
+}
+
+input ProjectRelateToOneForUpdateInput {
+  create: ProjectCreateInput
+  connect: ProjectWhereUniqueInput
+  disconnect: Boolean
+}
+
+input ProjectImageUpdateArgs {
+  where: ProjectImageWhereUniqueInput!
+  data: ProjectImageUpdateInput!
+}
+
+input ProjectImageCreateInput {
+  alt: String
+  file: ImageFieldInput
+  sortOrder: Int
+  project: ProjectRelateToOneForCreateInput
+}
+
+input ProjectRelateToOneForCreateInput {
+  create: ProjectCreateInput
+  connect: ProjectWhereUniqueInput
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -239,6 +466,18 @@ type Mutation {
   updateMainPageImages(data: [mainPageImageUpdateArgs!]!): [mainPageImage]
   deletemainPageImage(where: mainPageImageWhereUniqueInput!): mainPageImage
   deleteMainPageImages(where: [mainPageImageWhereUniqueInput!]!): [mainPageImage]
+  createProject(data: ProjectCreateInput!): Project
+  createProjects(data: [ProjectCreateInput!]!): [Project]
+  updateProject(where: ProjectWhereUniqueInput!, data: ProjectUpdateInput!): Project
+  updateProjects(data: [ProjectUpdateArgs!]!): [Project]
+  deleteProject(where: ProjectWhereUniqueInput!): Project
+  deleteProjects(where: [ProjectWhereUniqueInput!]!): [Project]
+  createProjectImage(data: ProjectImageCreateInput!): ProjectImage
+  createProjectImages(data: [ProjectImageCreateInput!]!): [ProjectImage]
+  updateProjectImage(where: ProjectImageWhereUniqueInput!, data: ProjectImageUpdateInput!): ProjectImage
+  updateProjectImages(data: [ProjectImageUpdateArgs!]!): [ProjectImage]
+  deleteProjectImage(where: ProjectImageWhereUniqueInput!): ProjectImage
+  deleteProjectImages(where: [ProjectImageWhereUniqueInput!]!): [ProjectImage]
   endSession: Boolean!
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -271,6 +510,12 @@ type Query {
   mainPageImage(where: mainPageImageWhereUniqueInput!): mainPageImage
   mainPageImages(where: mainPageImageWhereInput! = {}, orderBy: [mainPageImageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: mainPageImageWhereUniqueInput): [mainPageImage!]
   mainPageImagesCount(where: mainPageImageWhereInput! = {}): Int
+  project(where: ProjectWhereUniqueInput!): Project
+  projects(where: ProjectWhereInput! = {}, orderBy: [ProjectOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProjectWhereUniqueInput): [Project!]
+  projectsCount(where: ProjectWhereInput! = {}): Int
+  projectImage(where: ProjectImageWhereUniqueInput!): ProjectImage
+  projectImages(where: ProjectImageWhereInput! = {}, orderBy: [ProjectImageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProjectImageWhereUniqueInput): [ProjectImage!]
+  projectImagesCount(where: ProjectImageWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }

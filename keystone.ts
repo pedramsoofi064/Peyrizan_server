@@ -39,6 +39,21 @@ export default withAuth(
         // serverRoute: null
         storagePath: "public/main/images",
       },
+      project_images: {
+        // Images that use this store will be stored on the local machine
+        kind: "local",
+        // This store is used for the image field type
+        type: "image",
+        // The URL that is returned in the Keystone GraphQL API
+        generateUrl: (path) => `/project/images${path}`,
+        // The route that will be created in Keystone's backend to serve the images
+        serverRoute: {
+          path: "/project/images",
+        },
+        // Set serverRoute to null if you don't want a route to be created in Keystone
+        // serverRoute: null
+        storagePath: "public/project/images",
+      },
       images: {
         // Images that use this store will be stored on the local machine
         kind: "local",

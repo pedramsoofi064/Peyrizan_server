@@ -32,6 +32,8 @@ export const lists = {
   Image: AppList.Image,
   User: AppList.User,
   mainPageImage: AppList.mainPageImage,
+  Project: AppList.Project,
+  ProjectImage: AppList.ProjectImage,
 
   // Post: list({
   //   // WARNING
@@ -46,18 +48,18 @@ export const lists = {
 
   //     // the document field can be used for making rich editable content
   //     //   you can find out more at https://keystonejs.com/docs/guides/document-fields
-  //     content: document({
-  //       formatting: true,
-  //       layouts: [
-  //         [1, 1],
-  //         [1, 1, 1],
-  //         [2, 1],
-  //         [1, 2],
-  //         [1, 2, 1],
-  //       ],
-  //       links: true,
-  //       dividers: true,
-  //     }),
+      // content: document({
+      //   formatting: true,
+      //   layouts: [
+      //     [1, 1],
+      //     [1, 1, 1],
+      //     [2, 1],
+      //     [1, 2],
+      //     [1, 2, 1],
+      //   ],
+      //   links: true,
+      //   dividers: true,
+      // }),
 
   //     // with this field, you can set a User as the author for a Post
   //     author: relationship({

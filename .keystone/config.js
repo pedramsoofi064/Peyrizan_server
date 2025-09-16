@@ -23,7 +23,7 @@ __export(keystone_exports, {
   default: () => keystone_default
 });
 module.exports = __toCommonJS(keystone_exports);
-var import_core4 = require("@keystone-6/core");
+var import_core6 = require("@keystone-6/core");
 
 // lists/Image.list.ts
 var import_core = require("@keystone-6/core");
@@ -99,18 +99,161 @@ var mainPageImage_list_default = (0, import_core3.list)({
   }
 });
 
+// lists/Project.list.ts
+var import_core4 = require("@keystone-6/core");
+var import_access4 = require("@keystone-6/core/access");
+var import_fields4 = require("@keystone-6/core/fields");
+var Project_list_default = (0, import_core4.list)({
+  ui: {
+    label: "\u067E\u0631\u0648\u0698\u0647 \u0647\u0627",
+    description: "\u062A\u0645\u0627\u0645 \u067E\u0631\u0648\u0698\u0647 ",
+    listView: {
+      pageSize: 20,
+      // default page size in Admin UI
+      initialColumns: ["titleFa", "status", "progressPercentage"],
+      initialSort: { field: "startDate", direction: "DESC" }
+    }
+  },
+  access: import_access4.allowAll,
+  fields: {
+    titleFa: (0, import_fields4.text)({
+      label: "\u0639\u0646\u0648\u0627\u0646 \u0628\u0647 \u0641\u0627\u0631\u0633\u06CC"
+    }),
+    titleEn: (0, import_fields4.text)({
+      label: "\u0639\u0646\u0648\u0627\u0646 \u0628\u0647 \u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC"
+    }),
+    summaryFa: (0, import_fields4.text)({
+      label: "\u062E\u0644\u0627\u0635\u0647 \u0628\u0647 \u0641\u0627\u0631\u0633\u06CC",
+      ui: {
+        displayMode: "textarea"
+      }
+    }),
+    summaryEn: (0, import_fields4.text)({
+      label: "\u062E\u0644\u0627\u0635\u0647 \u0628\u0647 \u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC",
+      ui: {
+        displayMode: "textarea"
+      }
+    }),
+    descriptionFa: (0, import_fields4.text)({
+      label: "\u062A\u0648\u0636\u06CC\u062D\u0627\u062A \u0628\u0647 \u0641\u0627\u0631\u0633\u06CC",
+      ui: {
+        displayMode: "textarea"
+      }
+    }),
+    descriptionEn: (0, import_fields4.text)({
+      label: "\u062A\u0648\u0636\u06CC\u062D\u0627\u062A \u0628\u0647 \u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC",
+      ui: {
+        displayMode: "textarea"
+      }
+    }),
+    employerFa: (0, import_fields4.text)({
+      label: "\u06A9\u0627\u0631\u0641\u0631\u0645\u0627 \u0628\u0647 \u0641\u0627\u0631\u0633\u06CC"
+    }),
+    employerEn: (0, import_fields4.text)({
+      label: "\u06A9\u0627\u0631\u0641\u0631\u0645\u0627 \u0628\u0647 \u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC"
+    }),
+    advisorFa: (0, import_fields4.text)({
+      label: "\u0645\u0634\u0627\u0648\u0631 \u0628\u0647 \u0641\u0627\u0631\u0633\u06CC"
+    }),
+    advisorEn: (0, import_fields4.text)({
+      label: "\u0645\u0634\u0627\u0648\u0631 \u0628\u0647 \u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC"
+    }),
+    locationFa: (0, import_fields4.text)({
+      label: "\u0645\u06A9\u0627\u0646 \u0628\u0647 \u0641\u0627\u0631\u0633\u06CC"
+    }),
+    locationEn: (0, import_fields4.text)({
+      label: "\u0645\u06A9\u0627\u0646 \u0628\u0647 \u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC"
+    }),
+    progressPercentage: (0, import_fields4.integer)({
+      label: "\u062F\u0631\u0635\u062F \u067E\u06CC\u0634\u0631\u0641\u062A",
+      validation: {
+        min: 0,
+        max: 100,
+        isRequired: false
+        // set to true if always required
+      },
+      defaultValue: 0,
+      // optional
+      ui: {
+        description: "\u0639\u062F\u062F\u06CC \u0628\u06CC\u0646 0 \u062A\u0627 100 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F"
+      }
+    }),
+    status: (0, import_fields4.select)({
+      label: "\u0648\u0636\u0639\u06CC\u062A \u067E\u0631\u0648\u0698\u0647",
+      options: [
+        { label: "\u062F\u0631 \u062D\u0627\u0644 \u0627\u0646\u062C\u0627\u0645", value: "inProgress" },
+        { label: "\u062A\u06A9\u0645\u06CC\u0644 \u0634\u062F\u0647", value: "completed" }
+      ],
+      defaultValue: "inProgress",
+      ui: {
+        displayMode: "select"
+        // dropdown (default)
+      }
+    }),
+    startDate: (0, import_fields4.timestamp)({
+      label: "\u062A\u0627\u0631\u06CC\u062E \u0634\u0631\u0648\u0639",
+      validation: { isRequired: true }
+    }),
+    endDate: (0, import_fields4.timestamp)({
+      label: "\u062A\u0627\u0631\u06CC\u062E \u067E\u0627\u06CC\u0627\u0646",
+      validation: { isRequired: false }
+    }),
+    images: (0, import_fields4.relationship)({
+      label: "\u062A\u0635\u0627\u0648\u06CC\u0631",
+      ref: "ProjectImage.project",
+      many: true,
+      ui: {
+        displayMode: "cards",
+        cardFields: ["file", "alt", "sortOrder"],
+        inlineCreate: { fields: ["file", "alt", "sortOrder"] },
+        inlineEdit: { fields: ["file", "alt", "sortOrder"] },
+        linkToItem: true,
+        removeMode: "disconnect"
+      }
+    })
+  },
+  hooks: {
+    validateInput: async ({ resolvedData, addValidationError }) => {
+      if (resolvedData.status === "completed" && !resolvedData.endDate) {
+        addValidationError("\u0628\u0631\u0627\u06CC \u067E\u0631\u0648\u0698\u0647\u200C\u0647\u0627\u06CC \u062A\u06A9\u0645\u06CC\u0644\u200C\u0634\u062F\u0647\u060C \u062A\u0627\u0631\u06CC\u062E \u067E\u0627\u06CC\u0627\u0646 \u0627\u0644\u0632\u0627\u0645\u06CC \u0627\u0633\u062A.");
+      }
+    }
+  }
+});
+
+// lists/ProjectImage.list.ts
+var import_core5 = require("@keystone-6/core");
+var import_fields5 = require("@keystone-6/core/fields");
+var import_access5 = require("@keystone-6/core/access");
+var ProjectImage_list_default = (0, import_core5.list)({
+  ui: {
+    label: "\u062A\u0635\u0627\u0648\u06CC\u0631 \u067E\u0631\u0648\u0698\u0647"
+  },
+  fields: {
+    alt: (0, import_fields5.text)({ label: "\u062A\u0648\u0636\u06CC\u062D \u062A\u0635\u0648\u06CC\u0631 (alt)" }),
+    file: (0, import_fields5.image)({ storage: "project_images", label: "\u0641\u0627\u06CC\u0644 \u062A\u0635\u0648\u06CC\u0631" }),
+    sortOrder: (0, import_fields5.integer)({ label: "\u062A\u0631\u062A\u06CC\u0628", defaultValue: 0 }),
+    project: (0, import_fields5.relationship)({ ref: "Project.images", label: "\u067E\u0631\u0648\u0698\u0647" })
+  },
+  access: import_access5.allowAll
+});
+
 // lists/index.ts
 var lists_default = {
   Image: Image_list_default,
   User: User_list_default,
-  mainPageImage: mainPageImage_list_default
+  mainPageImage: mainPageImage_list_default,
+  Project: Project_list_default,
+  ProjectImage: ProjectImage_list_default
 };
 
 // schema.ts
 var lists = {
   Image: lists_default.Image,
   User: lists_default.User,
-  mainPageImage: lists_default.mainPageImage
+  mainPageImage: lists_default.mainPageImage,
+  Project: lists_default.Project,
+  ProjectImage: lists_default.ProjectImage
   // Post: list({
   //   // WARNING
   //   //   for this starter project, anyone can create, query, update and delete anything
@@ -122,18 +265,18 @@ var lists = {
   //     title: text({ validation: { isRequired: true } }),
   //     // the document field can be used for making rich editable content
   //     //   you can find out more at https://keystonejs.com/docs/guides/document-fields
-  //     content: document({
-  //       formatting: true,
-  //       layouts: [
-  //         [1, 1],
-  //         [1, 1, 1],
-  //         [2, 1],
-  //         [1, 2],
-  //         [1, 2, 1],
-  //       ],
-  //       links: true,
-  //       dividers: true,
-  //     }),
+  // content: document({
+  //   formatting: true,
+  //   layouts: [
+  //     [1, 1],
+  //     [1, 1, 1],
+  //     [2, 1],
+  //     [1, 2],
+  //     [1, 2, 1],
+  //   ],
+  //   links: true,
+  //   dividers: true,
+  // }),
   //     // with this field, you can set a User as the author for a Post
   //     author: relationship({
   //       // we could have used 'User', but then the relationship would only be 1-way
@@ -218,7 +361,7 @@ var session = (0, import_session.statelessSessions)({
 
 // keystone.ts
 var keystone_default = withAuth(
-  (0, import_core4.config)({
+  (0, import_core6.config)({
     db: {
       // we're using sqlite for the fastest startup experience
       //   for more information on what database might be appropriate for you
@@ -241,6 +384,21 @@ var keystone_default = withAuth(
         // Set serverRoute to null if you don't want a route to be created in Keystone
         // serverRoute: null
         storagePath: "public/main/images"
+      },
+      project_images: {
+        // Images that use this store will be stored on the local machine
+        kind: "local",
+        // This store is used for the image field type
+        type: "image",
+        // The URL that is returned in the Keystone GraphQL API
+        generateUrl: (path) => `/project/images${path}`,
+        // The route that will be created in Keystone's backend to serve the images
+        serverRoute: {
+          path: "/project/images"
+        },
+        // Set serverRoute to null if you don't want a route to be created in Keystone
+        // serverRoute: null
+        storagePath: "public/project/images"
       },
       images: {
         // Images that use this store will be stored on the local machine

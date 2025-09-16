@@ -39,3 +39,39 @@ model mainPageImage {
   image_height    Int?
   image_extension String?
 }
+
+model Project {
+  id                 String         @id @default(cuid())
+  titleFa            String         @default("")
+  titleEn            String         @default("")
+  summaryFa          String         @default("")
+  summaryEn          String         @default("")
+  descriptionFa      String         @default("")
+  descriptionEn      String         @default("")
+  employerFa         String         @default("")
+  employerEn         String         @default("")
+  advisorFa          String         @default("")
+  advisorEn          String         @default("")
+  locationFa         String         @default("")
+  locationEn         String         @default("")
+  progressPercentage Int?           @default(0)
+  status             String?        @default("inProgress")
+  startDate          DateTime
+  endDate            DateTime?
+  images             ProjectImage[] @relation("ProjectImage_project")
+}
+
+model ProjectImage {
+  id             String   @id @default(cuid())
+  alt            String   @default("")
+  file_id        String?
+  file_filesize  Int?
+  file_width     Int?
+  file_height    Int?
+  file_extension String?
+  sortOrder      Int?     @default(0)
+  project        Project? @relation("ProjectImage_project", fields: [projectId], references: [id])
+  projectId      String?  @map("project")
+
+  @@index([projectId])
+}
