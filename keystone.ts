@@ -30,44 +30,48 @@ export default withAuth(
         // This store is used for the image field type
         type: "image",
         // The URL that is returned in the Keystone GraphQL API
-        generateUrl: (path) => `/main/images${path}`,
+        generateUrl: (path) => `/uploads/main/${path}`,
         // The route that will be created in Keystone's backend to serve the images
         serverRoute: {
-          path: "/main/images",
+          path: "/uploads/main",
         },
         // Set serverRoute to null if you don't want a route to be created in Keystone
         // serverRoute: null
-        storagePath: "public/main/images",
+        storagePath: "public/uploads/main",
       },
       project_images: {
-        // Images that use this store will be stored on the local machine
         kind: "local",
-        // This store is used for the image field type
         type: "image",
-        // The URL that is returned in the Keystone GraphQL API
-        generateUrl: (path) => `/project/images${path}`,
-        // The route that will be created in Keystone's backend to serve the images
+        generateUrl: (path) => `/uploads/project/${path}`,
         serverRoute: {
-          path: "/project/images",
+          path: "/uploads/project",
         },
-        // Set serverRoute to null if you don't want a route to be created in Keystone
-        // serverRoute: null
-        storagePath: "public/project/images",
+        storagePath: "public/uploads/project",
       },
       images: {
-        // Images that use this store will be stored on the local machine
         kind: "local",
-        // This store is used for the image field type
         type: "image",
-        // The URL that is returned in the Keystone GraphQL API
         generateUrl: (path) => `/images${path}`,
-        // The route that will be created in Keystone's backend to serve the images
         serverRoute: {
           path: "/images",
         },
-        // Set serverRoute to null if you don't want a route to be created in Keystone
-        // serverRoute: null
         storagePath: "public/images",
+      },
+
+      certificate_images: {
+        kind: "local",
+        type: "image",
+        generateUrl: (path) => `/uploads/certificates/${path}`,
+        serverRoute: { path: "/uploads/certificates" },
+        storagePath: "public/uploads/certificates",
+      },
+
+      news_images: {
+        kind: "local",
+        type: "image",
+        generateUrl: (path) => `/uploads/news_/${path}`,
+        serverRoute: { path: "/uploads/news_" },
+        storagePath: "public/uploads/news_",
       },
     },
     lists,

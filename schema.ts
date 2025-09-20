@@ -31,9 +31,12 @@ import AppList from "./lists/index";
 export const lists = {
   Image: AppList.Image,
   User: AppList.User,
-  mainPageImage: AppList.mainPageImage,
+  MainPageImage: AppList.MainPageImage,
   Project: AppList.Project,
   ProjectImage: AppList.ProjectImage,
+  Certificate: AppList.Certificate,
+  Report: AppList.Report,
+  ReportImage: AppList.ReportImage,
 
   // Post: list({
   //   // WARNING

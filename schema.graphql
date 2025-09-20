@@ -177,40 +177,40 @@ input UserCreateInput {
   createdAt: DateTime
 }
 
-type mainPageImage {
+type MainPageImage {
   id: ID!
   alt: String
   image: ImageFieldOutput
 }
 
-input mainPageImageWhereUniqueInput {
+input MainPageImageWhereUniqueInput {
   id: ID
 }
 
-input mainPageImageWhereInput {
-  AND: [mainPageImageWhereInput!]
-  OR: [mainPageImageWhereInput!]
-  NOT: [mainPageImageWhereInput!]
+input MainPageImageWhereInput {
+  AND: [MainPageImageWhereInput!]
+  OR: [MainPageImageWhereInput!]
+  NOT: [MainPageImageWhereInput!]
   id: IDFilter
   alt: StringFilter
 }
 
-input mainPageImageOrderByInput {
+input MainPageImageOrderByInput {
   id: OrderDirection
   alt: OrderDirection
 }
 
-input mainPageImageUpdateInput {
+input MainPageImageUpdateInput {
   alt: String
   image: ImageFieldInput
 }
 
-input mainPageImageUpdateArgs {
-  where: mainPageImageWhereUniqueInput!
-  data: mainPageImageUpdateInput!
+input MainPageImageUpdateArgs {
+  where: MainPageImageWhereUniqueInput!
+  data: MainPageImageUpdateInput!
 }
 
-input mainPageImageCreateInput {
+input MainPageImageCreateInput {
   alt: String
   image: ImageFieldInput
 }
@@ -442,6 +442,159 @@ input ProjectRelateToOneForCreateInput {
   connect: ProjectWhereUniqueInput
 }
 
+type Certificate {
+  id: ID!
+  titleFa: String
+  titleEn: String
+  file: ImageFieldOutput
+}
+
+input CertificateWhereUniqueInput {
+  id: ID
+}
+
+input CertificateWhereInput {
+  AND: [CertificateWhereInput!]
+  OR: [CertificateWhereInput!]
+  NOT: [CertificateWhereInput!]
+  id: IDFilter
+  titleFa: StringFilter
+  titleEn: StringFilter
+}
+
+input CertificateOrderByInput {
+  id: OrderDirection
+  titleFa: OrderDirection
+  titleEn: OrderDirection
+}
+
+input CertificateUpdateInput {
+  titleFa: String
+  titleEn: String
+  file: ImageFieldInput
+}
+
+input CertificateUpdateArgs {
+  where: CertificateWhereUniqueInput!
+  data: CertificateUpdateInput!
+}
+
+input CertificateCreateInput {
+  titleFa: String
+  titleEn: String
+  file: ImageFieldInput
+}
+
+type Report {
+  id: ID!
+  titleFa: String
+  titleEn: String
+  summaryFa: String
+  summaryEn: String
+  descriptionFa: Report_descriptionFa_Document
+  descriptionEn: Report_descriptionEn_Document
+  date: DateTime
+  file: ImageFieldOutput
+}
+
+type Report_descriptionFa_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+type Report_descriptionEn_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+input ReportWhereUniqueInput {
+  id: ID
+}
+
+input ReportWhereInput {
+  AND: [ReportWhereInput!]
+  OR: [ReportWhereInput!]
+  NOT: [ReportWhereInput!]
+  id: IDFilter
+  titleFa: StringFilter
+  titleEn: StringFilter
+  summaryFa: StringFilter
+  summaryEn: StringFilter
+  date: DateTimeFilter
+}
+
+input ReportOrderByInput {
+  id: OrderDirection
+  titleFa: OrderDirection
+  titleEn: OrderDirection
+  summaryFa: OrderDirection
+  summaryEn: OrderDirection
+  date: OrderDirection
+}
+
+input ReportUpdateInput {
+  titleFa: String
+  titleEn: String
+  summaryFa: String
+  summaryEn: String
+  descriptionFa: JSON
+  descriptionEn: JSON
+  date: DateTime
+  file: ImageFieldInput
+}
+
+input ReportUpdateArgs {
+  where: ReportWhereUniqueInput!
+  data: ReportUpdateInput!
+}
+
+input ReportCreateInput {
+  titleFa: String
+  titleEn: String
+  summaryFa: String
+  summaryEn: String
+  descriptionFa: JSON
+  descriptionEn: JSON
+  date: DateTime
+  file: ImageFieldInput
+}
+
+type ReportImage {
+  id: ID!
+  alt: String
+  file: ImageFieldOutput
+}
+
+input ReportImageWhereUniqueInput {
+  id: ID
+}
+
+input ReportImageWhereInput {
+  AND: [ReportImageWhereInput!]
+  OR: [ReportImageWhereInput!]
+  NOT: [ReportImageWhereInput!]
+  id: IDFilter
+  alt: StringFilter
+}
+
+input ReportImageOrderByInput {
+  id: OrderDirection
+  alt: OrderDirection
+}
+
+input ReportImageUpdateInput {
+  alt: String
+  file: ImageFieldInput
+}
+
+input ReportImageUpdateArgs {
+  where: ReportImageWhereUniqueInput!
+  data: ReportImageUpdateInput!
+}
+
+input ReportImageCreateInput {
+  alt: String
+  file: ImageFieldInput
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -460,12 +613,12 @@ type Mutation {
   updateUsers(data: [UserUpdateArgs!]!): [User]
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUsers(where: [UserWhereUniqueInput!]!): [User]
-  createmainPageImage(data: mainPageImageCreateInput!): mainPageImage
-  createMainPageImages(data: [mainPageImageCreateInput!]!): [mainPageImage]
-  updatemainPageImage(where: mainPageImageWhereUniqueInput!, data: mainPageImageUpdateInput!): mainPageImage
-  updateMainPageImages(data: [mainPageImageUpdateArgs!]!): [mainPageImage]
-  deletemainPageImage(where: mainPageImageWhereUniqueInput!): mainPageImage
-  deleteMainPageImages(where: [mainPageImageWhereUniqueInput!]!): [mainPageImage]
+  createMainPageImage(data: MainPageImageCreateInput!): MainPageImage
+  createMainPageImages(data: [MainPageImageCreateInput!]!): [MainPageImage]
+  updateMainPageImage(where: MainPageImageWhereUniqueInput!, data: MainPageImageUpdateInput!): MainPageImage
+  updateMainPageImages(data: [MainPageImageUpdateArgs!]!): [MainPageImage]
+  deleteMainPageImage(where: MainPageImageWhereUniqueInput!): MainPageImage
+  deleteMainPageImages(where: [MainPageImageWhereUniqueInput!]!): [MainPageImage]
   createProject(data: ProjectCreateInput!): Project
   createProjects(data: [ProjectCreateInput!]!): [Project]
   updateProject(where: ProjectWhereUniqueInput!, data: ProjectUpdateInput!): Project
@@ -478,6 +631,24 @@ type Mutation {
   updateProjectImages(data: [ProjectImageUpdateArgs!]!): [ProjectImage]
   deleteProjectImage(where: ProjectImageWhereUniqueInput!): ProjectImage
   deleteProjectImages(where: [ProjectImageWhereUniqueInput!]!): [ProjectImage]
+  createCertificate(data: CertificateCreateInput!): Certificate
+  createCertificates(data: [CertificateCreateInput!]!): [Certificate]
+  updateCertificate(where: CertificateWhereUniqueInput!, data: CertificateUpdateInput!): Certificate
+  updateCertificates(data: [CertificateUpdateArgs!]!): [Certificate]
+  deleteCertificate(where: CertificateWhereUniqueInput!): Certificate
+  deleteCertificates(where: [CertificateWhereUniqueInput!]!): [Certificate]
+  createReport(data: ReportCreateInput!): Report
+  createReports(data: [ReportCreateInput!]!): [Report]
+  updateReport(where: ReportWhereUniqueInput!, data: ReportUpdateInput!): Report
+  updateReports(data: [ReportUpdateArgs!]!): [Report]
+  deleteReport(where: ReportWhereUniqueInput!): Report
+  deleteReports(where: [ReportWhereUniqueInput!]!): [Report]
+  createReportImage(data: ReportImageCreateInput!): ReportImage
+  createReportImages(data: [ReportImageCreateInput!]!): [ReportImage]
+  updateReportImage(where: ReportImageWhereUniqueInput!, data: ReportImageUpdateInput!): ReportImage
+  updateReportImages(data: [ReportImageUpdateArgs!]!): [ReportImage]
+  deleteReportImage(where: ReportImageWhereUniqueInput!): ReportImage
+  deleteReportImages(where: [ReportImageWhereUniqueInput!]!): [ReportImage]
   endSession: Boolean!
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -507,15 +678,24 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput! = {}, orderBy: [UserOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserWhereUniqueInput): [User!]
   usersCount(where: UserWhereInput! = {}): Int
-  mainPageImage(where: mainPageImageWhereUniqueInput!): mainPageImage
-  mainPageImages(where: mainPageImageWhereInput! = {}, orderBy: [mainPageImageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: mainPageImageWhereUniqueInput): [mainPageImage!]
-  mainPageImagesCount(where: mainPageImageWhereInput! = {}): Int
+  mainPageImage(where: MainPageImageWhereUniqueInput!): MainPageImage
+  mainPageImages(where: MainPageImageWhereInput! = {}, orderBy: [MainPageImageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: MainPageImageWhereUniqueInput): [MainPageImage!]
+  mainPageImagesCount(where: MainPageImageWhereInput! = {}): Int
   project(where: ProjectWhereUniqueInput!): Project
   projects(where: ProjectWhereInput! = {}, orderBy: [ProjectOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProjectWhereUniqueInput): [Project!]
   projectsCount(where: ProjectWhereInput! = {}): Int
   projectImage(where: ProjectImageWhereUniqueInput!): ProjectImage
   projectImages(where: ProjectImageWhereInput! = {}, orderBy: [ProjectImageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProjectImageWhereUniqueInput): [ProjectImage!]
   projectImagesCount(where: ProjectImageWhereInput! = {}): Int
+  certificate(where: CertificateWhereUniqueInput!): Certificate
+  certificates(where: CertificateWhereInput! = {}, orderBy: [CertificateOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: CertificateWhereUniqueInput): [Certificate!]
+  certificatesCount(where: CertificateWhereInput! = {}): Int
+  report(where: ReportWhereUniqueInput!): Report
+  reports(where: ReportWhereInput! = {}, orderBy: [ReportOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ReportWhereUniqueInput): [Report!]
+  reportsCount(where: ReportWhereInput! = {}): Int
+  reportImage(where: ReportImageWhereUniqueInput!): ReportImage
+  reportImages(where: ReportImageWhereInput! = {}, orderBy: [ReportImageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ReportImageWhereUniqueInput): [ReportImage!]
+  reportImagesCount(where: ReportImageWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }

@@ -27,25 +27,30 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/project-images": [
+    "/report-images": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/project-images.js"
+      "static/chunks/pages/report-images.js"
     ],
-    "/project-images/[id]": [
+    "/report-images/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/project-images/[id].js"
+      "static/chunks/pages/report-images/[id].js"
     ],
-    "/projects": [
+    "/report-images/create": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/projects.js"
+      "static/chunks/pages/report-images/create.js"
     ],
-    "/projects/create": [
+    "/reports": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/projects/create.js"
+      "static/chunks/pages/reports.js"
+    ],
+    "/reports/create": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/reports/create.js"
     ],
     "/signin": [
       "static/chunks/webpack.js",

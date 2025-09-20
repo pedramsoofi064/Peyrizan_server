@@ -3,9 +3,10 @@
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
   "/signin": "pages/signin.js",
+  "/report-images": "pages/report-images.js",
   "/": "pages/index.js",
-  "/projects": "pages/projects.js",
-  "/projects/create": "pages/projects/create.js",
-  "/project-images": "pages/project-images.js",
-  "/project-images/[id]": "pages/project-images/[id].js"
+  "/report-images/create": "pages/report-images/create.js",
+  "/report-images/[id]": "pages/report-images/[id].js",
+  "/reports": "pages/reports.js",
+  "/reports/create": "pages/reports/create.js"
 }

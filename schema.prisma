@@ -30,7 +30,7 @@ model User {
   createdAt DateTime? @default(now())
 }
 
-model mainPageImage {
+model MainPageImage {
   id              String  @id @default(cuid())
   alt             String  @default("")
   image_id        String?
@@ -74,4 +74,41 @@ model ProjectImage {
   projectId      String?  @map("project")
 
   @@index([projectId])
+}
+
+model Certificate {
+  id             String  @id @default(cuid())
+  titleFa        String  @default("")
+  titleEn        String  @default("")
+  file_id        String?
+  file_filesize  Int?
+  file_width     Int?
+  file_height    Int?
+  file_extension String?
+}
+
+model Report {
+  id             String   @id @default(cuid())
+  titleFa        String   @default("")
+  titleEn        String   @default("")
+  summaryFa      String   @default("")
+  summaryEn      String   @default("")
+  descriptionFa  String   @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  descriptionEn  String   @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  date           DateTime
+  file_id        String?
+  file_filesize  Int?
+  file_width     Int?
+  file_height    Int?
+  file_extension String?
+}
+
+model ReportImage {
+  id             String  @id @default(cuid())
+  alt            String  @default("")
+  file_id        String?
+  file_filesize  Int?
+  file_width     Int?
+  file_height    Int?
+  file_extension String?
 }

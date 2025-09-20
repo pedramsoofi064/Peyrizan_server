@@ -1,7 +1,9 @@
 "use strict";
+var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __export = (target, all) => {
   for (var name in all)
@@ -15,6 +17,14 @@ var __copyProps = (to, from, except, desc) => {
   }
   return to;
 };
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // keystone.ts
@@ -23,7 +33,7 @@ __export(keystone_exports, {
   default: () => keystone_default
 });
 module.exports = __toCommonJS(keystone_exports);
-var import_core6 = require("@keystone-6/core");
+var import_core9 = require("@keystone-6/core");
 
 // lists/Image.list.ts
 var import_core = require("@keystone-6/core");
@@ -79,11 +89,11 @@ var User_list_default = (0, import_core2.list)({
   }
 });
 
-// lists/mainPageImage.list.ts
+// lists/MainPageImage.list.ts
 var import_core3 = require("@keystone-6/core");
 var import_access3 = require("@keystone-6/core/access");
 var import_fields3 = require("@keystone-6/core/fields");
-var mainPageImage_list_default = (0, import_core3.list)({
+var MainPageImage_list_default = (0, import_core3.list)({
   ui: {
     label: "\u062A\u0635\u0627\u0648\u06CC\u0631 \u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC",
     description: "\u062A\u0645\u0627\u0645 \u062A\u0635\u0627\u0648\u06CC\u0631 \u0642\u0633\u0645\u062A \u0627\u0648\u0644 \u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC"
@@ -238,22 +248,225 @@ var ProjectImage_list_default = (0, import_core5.list)({
   access: import_access5.allowAll
 });
 
+// lists/Certificate.list.ts
+var import_core6 = require("@keystone-6/core");
+var import_access6 = require("@keystone-6/core/access");
+var import_fields6 = require("@keystone-6/core/fields");
+var Certificate_list_default = (0, import_core6.list)({
+  access: import_access6.allowAll,
+  ui: {
+    label: "\u06AF\u0648\u0627\u0647\u06CC\u0646\u0627\u0645\u0647 \u0647\u0627",
+    listView: {
+      initialColumns: ["titleFa", "titleEn", "file"],
+      initialSort: { field: "titleFa", direction: "ASC" },
+      pageSize: 20
+    }
+  },
+  fields: {
+    titleFa: (0, import_fields6.text)({
+      label: "\u0639\u0646\u0648\u0627\u0646 (\u0641\u0627\u0631\u0633\u06CC)",
+      validation: { isRequired: true },
+      ui: { description: "\u0639\u0646\u0648\u0627\u0646 \u06AF\u0648\u0627\u0647\u06CC\u0646\u0627\u0645\u0647 \u0628\u0647 \u0632\u0628\u0627\u0646 \u0641\u0627\u0631\u0633\u06CC" }
+    }),
+    titleEn: (0, import_fields6.text)({
+      label: "\u0639\u0646\u0648\u0627\u0646 (\u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC)",
+      ui: { description: "\u0627\u062E\u062A\u06CC\u0627\u0631\u06CC" }
+    }),
+    file: (0, import_fields6.image)({
+      label: "\u062A\u0635\u0648\u06CC\u0631 \u06AF\u0648\u0627\u0647\u06CC\u0646\u0627\u0645\u0647",
+      storage: "certificate_images"
+    })
+  }
+});
+
+// lists/Report.list.ts
+var import_core7 = require("@keystone-6/core");
+var import_access7 = require("@keystone-6/core/access");
+var import_fields7 = require("@keystone-6/core/fields");
+var import_fields_document = require("@keystone-6/fields-document");
+
+// component-blocks/index.tsx
+var import_react = __toESM(require("react"));
+var import_component_blocks = require("@keystone-6/fields-document/component-blocks");
+var componentBlocks = {
+  ImageBlock: (0, import_component_blocks.component)({
+    label: "\u062A\u0635\u0648\u06CC\u0631",
+    preview: (props) => {
+      const rel = props.fields.image.value;
+      const url = rel?.data?.file?.url ?? "";
+      const alt = rel?.data?.alt ?? rel?.label ?? "";
+      const width = props.fields.width.value ?? "full";
+      const imgWidthStyle = width === "half" ? { width: "50%" } : { width: "100%" };
+      return /* @__PURE__ */ import_react.default.createElement("figure", { style: { margin: 0, position: "relative" } }, /* @__PURE__ */ import_react.default.createElement(import_component_blocks.NotEditable, null, url ? /* @__PURE__ */ import_react.default.createElement(
+        "img",
+        {
+          src: url,
+          alt,
+          style: { display: "block", ...imgWidthStyle, height: "auto", borderRadius: 6 }
+        }
+      ) : /* @__PURE__ */ import_react.default.createElement(
+        "div",
+        {
+          style: {
+            padding: 24,
+            border: "1px dashed #cbd5e0",
+            borderRadius: 8,
+            textAlign: "center",
+            ...imgWidthStyle
+          }
+        },
+        "\u062A\u0635\u0648\u06CC\u0631 \u0627\u0646\u062A\u062E\u0627\u0628/\u0622\u067E\u0644\u0648\u062F \u0646\u0634\u062F\u0647 \u0627\u0633\u062A"
+      )), /* @__PURE__ */ import_react.default.createElement(
+        "div",
+        {
+          style: {
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 60,
+            pointerEvents: "none"
+            // allow clicks through to the inner wrapper only
+          }
+        },
+        /* @__PURE__ */ import_react.default.createElement("div", { style: { pointerEvents: "auto" } }, props.fields.image.element)
+      ), /* @__PURE__ */ import_react.default.createElement("figcaption", { style: { opacity: 0.9, fontSize: 13, marginTop: 8 } }, props.fields.caption.element));
+    },
+    schema: {
+      image: import_component_blocks.fields.relationship({
+        label: "\u0627\u0646\u062A\u062E\u0627\u0628 \u062A\u0635\u0648\u06CC\u0631",
+        listKey: "ReportImage",
+        // <- make sure this matches your list exactly
+        selection: "id alt file { url }"
+      }),
+      caption: import_component_blocks.fields.child({ kind: "inline", placeholder: "\u062A\u0648\u0636\u06CC\u062D \u062A\u0635\u0648\u06CC\u0631 (\u0627\u062E\u062A\u06CC\u0627\u0631\u06CC)" }),
+      width: import_component_blocks.fields.select({
+        label: "\u0639\u0631\u0636",
+        options: [
+          { label: "\u062A\u0645\u0627\u0645 \u0639\u0631\u0636", value: "full" },
+          { label: "\u0646\u06CC\u0645\u0647 \u0639\u0631\u0636", value: "half" }
+        ],
+        defaultValue: "full"
+      })
+    }
+  })
+};
+
+// lists/Report.list.ts
+var Report_list_default = (0, import_core7.list)({
+  ui: {
+    label: "\u0627\u062E\u0628\u0627\u0631",
+    description: "\u062A\u0645\u0627\u0645 \u0627\u062E\u0628\u0627\u0631 ",
+    listView: {
+      pageSize: 20,
+      initialColumns: ["titleFa", "date", "file"],
+      initialSort: { field: "date", direction: "DESC" }
+    }
+  },
+  access: import_access7.allowAll,
+  fields: {
+    titleFa: (0, import_fields7.text)({ label: "\u0639\u0646\u0648\u0627\u0646 \u0628\u0647 \u0641\u0627\u0631\u0633\u06CC" }),
+    titleEn: (0, import_fields7.text)({ label: "\u0639\u0646\u0648\u0627\u0646 \u0628\u0647 \u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC" }),
+    summaryFa: (0, import_fields7.text)({
+      label: "\u062E\u0644\u0627\u0635\u0647 \u0628\u0647 \u0641\u0627\u0631\u0633\u06CC",
+      ui: { displayMode: "textarea" }
+    }),
+    summaryEn: (0, import_fields7.text)({
+      label: "\u062E\u0644\u0627\u0635\u0647 \u0628\u0647 \u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC",
+      ui: { displayMode: "textarea" }
+    }),
+    // 🔽 Rich text with images (via component blocks)
+    descriptionFa: (0, import_fields_document.document)({
+      label: "\u062A\u0648\u0636\u06CC\u062D\u0627\u062A \u0628\u0647 \u0641\u0627\u0631\u0633\u06CC",
+      formatting: {
+        inlineMarks: {
+          bold: true,
+          italic: true,
+          underline: true,
+          strikethrough: true,
+          code: true,
+          superscript: true,
+          subscript: true
+        },
+        listTypes: true,
+        headingLevels: [2, 3, 4],
+        blockTypes: true,
+        softBreaks: true,
+        alignment: true
+      },
+      links: true,
+      dividers: true,
+      layouts: [[1], [1, 1], [1, 2], [2, 1], [1, 1, 1]],
+      ui: { views: "./component-blocks/index" },
+      componentBlocks
+      // 👈 enables ImageBlock inside the editor
+    }),
+    descriptionEn: (0, import_fields_document.document)({
+      label: "\u062A\u0648\u0636\u06CC\u062D\u0627\u062A \u0628\u0647 \u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC",
+      formatting: {
+        inlineMarks: {
+          bold: true,
+          italic: true,
+          underline: true,
+          strikethrough: true,
+          code: true
+        },
+        listTypes: true,
+        headingLevels: [2, 3, 4],
+        blockTypes: true
+      },
+      links: true,
+      dividers: true,
+      layouts: [[1], [1, 1], [1, 2], [2, 1]],
+      ui: { views: "./component-blocks/index" },
+      componentBlocks
+    }),
+    date: (0, import_fields7.timestamp)({ label: "\u062A\u0627\u0631\u06CC\u062E", validation: { isRequired: true } }),
+    file: (0, import_fields7.image)({ label: "\u062A\u0635\u0648\u06CC\u0631 \u0627\u0635\u0644\u06CC \u062E\u0628\u0631", storage: "news_images" })
+  }
+});
+
+// lists/ReportImage.list.ts
+var import_core8 = require("@keystone-6/core");
+var import_access8 = require("@keystone-6/core/access");
+var import_fields8 = require("@keystone-6/core/fields");
+var ReportImage_list_default = (0, import_core8.list)({
+  access: import_access8.allowAll,
+  ui: {
+    label: "\u062A\u0635\u0627\u0648\u06CC\u0631 \u062E\u0628\u0631",
+    listView: {
+      initialColumns: ["file", "alt"]
+    }
+  },
+  fields: {
+    alt: (0, import_fields8.text)({ label: "\u0645\u062A\u0646 \u062C\u0627\u06CC\u06AF\u0632\u06CC\u0646 (alt)" }),
+    file: (0, import_fields8.image)({ label: "\u062A\u0635\u0648\u06CC\u0631", storage: "news_images" })
+  }
+});
+
 // lists/index.ts
 var lists_default = {
   Image: Image_list_default,
   User: User_list_default,
-  mainPageImage: mainPageImage_list_default,
+  MainPageImage: MainPageImage_list_default,
   Project: Project_list_default,
-  ProjectImage: ProjectImage_list_default
+  ProjectImage: ProjectImage_list_default,
+  Certificate: Certificate_list_default,
+  Report: Report_list_default,
+  ReportImage: ReportImage_list_default
 };
 
 // schema.ts
 var lists = {
   Image: lists_default.Image,
   User: lists_default.User,
-  mainPageImage: lists_default.mainPageImage,
+  MainPageImage: lists_default.MainPageImage,
   Project: lists_default.Project,
-  ProjectImage: lists_default.ProjectImage
+  ProjectImage: lists_default.ProjectImage,
+  Certificate: lists_default.Certificate,
+  Report: lists_default.Report,
+  ReportImage: lists_default.ReportImage
   // Post: list({
   //   // WARNING
   //   //   for this starter project, anyone can create, query, update and delete anything
@@ -361,7 +574,7 @@ var session = (0, import_session.statelessSessions)({
 
 // keystone.ts
 var keystone_default = withAuth(
-  (0, import_core6.config)({
+  (0, import_core9.config)({
     db: {
       // we're using sqlite for the fastest startup experience
       //   for more information on what database might be appropriate for you
@@ -376,44 +589,46 @@ var keystone_default = withAuth(
         // This store is used for the image field type
         type: "image",
         // The URL that is returned in the Keystone GraphQL API
-        generateUrl: (path) => `/main/images${path}`,
+        generateUrl: (path) => `/uploads/main/${path}`,
         // The route that will be created in Keystone's backend to serve the images
         serverRoute: {
-          path: "/main/images"
+          path: "/uploads/main"
         },
         // Set serverRoute to null if you don't want a route to be created in Keystone
         // serverRoute: null
-        storagePath: "public/main/images"
+        storagePath: "public/uploads/main"
       },
       project_images: {
-        // Images that use this store will be stored on the local machine
         kind: "local",
-        // This store is used for the image field type
         type: "image",
-        // The URL that is returned in the Keystone GraphQL API
-        generateUrl: (path) => `/project/images${path}`,
-        // The route that will be created in Keystone's backend to serve the images
+        generateUrl: (path) => `/uploads/project/${path}`,
         serverRoute: {
-          path: "/project/images"
+          path: "/uploads/project"
         },
-        // Set serverRoute to null if you don't want a route to be created in Keystone
-        // serverRoute: null
-        storagePath: "public/project/images"
+        storagePath: "public/uploads/project"
       },
       images: {
-        // Images that use this store will be stored on the local machine
         kind: "local",
-        // This store is used for the image field type
         type: "image",
-        // The URL that is returned in the Keystone GraphQL API
         generateUrl: (path) => `/images${path}`,
-        // The route that will be created in Keystone's backend to serve the images
         serverRoute: {
           path: "/images"
         },
-        // Set serverRoute to null if you don't want a route to be created in Keystone
-        // serverRoute: null
         storagePath: "public/images"
+      },
+      certificate_images: {
+        kind: "local",
+        type: "image",
+        generateUrl: (path) => `/uploads/certificates/${path}`,
+        serverRoute: { path: "/uploads/certificates" },
+        storagePath: "public/uploads/certificates"
+      },
+      news_images: {
+        kind: "local",
+        type: "image",
+        generateUrl: (path) => `/uploads/news_/${path}`,
+        serverRoute: { path: "/uploads/news_" },
+        storagePath: "public/uploads/news_"
       }
     },
     lists,
