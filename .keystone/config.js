@@ -96,7 +96,8 @@ var import_fields3 = require("@keystone-6/core/fields");
 var MainPageImage_list_default = (0, import_core3.list)({
   ui: {
     label: "\u062A\u0635\u0627\u0648\u06CC\u0631 \u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC",
-    description: "\u062A\u0645\u0627\u0645 \u062A\u0635\u0627\u0648\u06CC\u0631 \u0642\u0633\u0645\u062A \u0627\u0648\u0644 \u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC"
+    description: "\u062A\u0645\u0627\u0645 \u062A\u0635\u0627\u0648\u06CC\u0631 \u0642\u0633\u0645\u062A \u0627\u0648\u0644 \u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC",
+    labelField: "alt"
   },
   access: import_access3.allowAll,
   fields: {
@@ -437,7 +438,9 @@ var ReportImage_list_default = (0, import_core8.list)({
     label: "\u062A\u0635\u0627\u0648\u06CC\u0631 \u062E\u0628\u0631",
     listView: {
       initialColumns: ["file", "alt"]
-    }
+    },
+    // 👇 This controls what shows up in relationship dropdowns
+    labelField: "alt"
   },
   fields: {
     alt: (0, import_fields8.text)({ label: "\u0645\u062A\u0646 \u062C\u0627\u06CC\u06AF\u0632\u06CC\u0646 (alt)" }),

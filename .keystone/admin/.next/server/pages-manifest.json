@@ -1,12 +1,10 @@
 {
   "/_app": "pages/_app.js",
-  "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/signin": "pages/signin.js",
-  "/report-images": "pages/report-images.js",
+  "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/report-images/create": "pages/report-images/create.js",
-  "/report-images/[id]": "pages/report-images/[id].js",
-  "/reports": "pages/reports.js",
-  "/reports/create": "pages/reports/create.js"
+  "/main-page-images": "pages/main-page-images.js",
+  "/main-page-images/[id]": "pages/main-page-images/[id].js",
+  "/report-images": "pages/report-images.js",
+  "/main-page-images/create": "pages/main-page-images/create.js"
 }

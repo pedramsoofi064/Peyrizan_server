@@ -20,11 +20,12 @@ export default list({
   ui: {
     label: "تصاویر صفحه اصلی",
     description: "تمام تصاویر قسمت اول صفحه اصلی",
+    labelField: "alt",
   },
   access: allowAll,
   fields: {
     alt: text({
-      label: "نام تصویر"
+      label: "نام تصویر",
     }),
     image: image({
       storage: "main_images",
