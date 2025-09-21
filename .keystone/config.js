@@ -33,7 +33,7 @@ __export(keystone_exports, {
   default: () => keystone_default
 });
 module.exports = __toCommonJS(keystone_exports);
-var import_core12 = require("@keystone-6/core");
+var import_core14 = require("@keystone-6/core");
 
 // lists/Image.list.ts
 var import_core = require("@keystone-6/core");
@@ -549,6 +549,98 @@ var Gallery_list_default = (0, import_core11.list)({
   }
 });
 
+// lists/Comment.list.ts
+var import_core12 = require("@keystone-6/core");
+var import_access12 = require("@keystone-6/core/access");
+var import_fields12 = require("@keystone-6/core/fields");
+var Comment_list_default = (0, import_core12.list)({
+  access: import_access12.allowAll,
+  // در محیط واقعی بهتره محدودتر بشه
+  ui: {
+    label: "\u0646\u0638\u0631\u0627\u062A \u06A9\u0627\u0631\u0628\u0631\u0627\u0646",
+    listView: {
+      initialColumns: ["firstName", "lastName", "email", "createdAt"],
+      initialSort: { field: "createdAt", direction: "DESC" }
+    }
+  },
+  fields: {
+    firstName: (0, import_fields12.text)({ label: "\u0646\u0627\u0645", validation: { isRequired: true } }),
+    lastName: (0, import_fields12.text)({ label: "\u0646\u0627\u0645 \u062E\u0627\u0646\u0648\u0627\u062F\u06AF\u06CC", validation: { isRequired: true } }),
+    email: (0, import_fields12.text)({
+      label: "\u0627\u06CC\u0645\u06CC\u0644",
+      validation: { isRequired: true, match: { regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ } },
+      isIndexed: "unique"
+    }),
+    message: (0, import_fields12.text)({
+      label: "\u067E\u06CC\u0627\u0645",
+      ui: { displayMode: "textarea" },
+      validation: { isRequired: true }
+    }),
+    createdAt: (0, import_fields12.timestamp)({
+      label: "\u062A\u0627\u0631\u06CC\u062E \u062B\u0628\u062A",
+      defaultValue: { kind: "now" },
+      ui: { itemView: { fieldMode: "read" } }
+    })
+  }
+});
+
+// lists/Application.list.ts
+var import_core13 = require("@keystone-6/core");
+var import_access13 = require("@keystone-6/core/access");
+var import_fields13 = require("@keystone-6/core/fields");
+var Application_list_default = (0, import_core13.list)({
+  access: import_access13.allowAll,
+  // 🔒 Consider restricting for production
+  ui: {
+    label: "Application Form",
+    listView: {
+      initialColumns: ["fullName", "email", "gender", "marriageStatus", "createdAt"]
+    }
+  },
+  fields: {
+    fullName: (0, import_fields13.text)({
+      label: "Full Name",
+      validation: { isRequired: true }
+    }),
+    birthDate: (0, import_fields13.calendarDay)({
+      label: "Birth Date",
+      validation: { isRequired: true }
+    }),
+    gender: (0, import_fields13.select)({
+      label: "Gender",
+      options: [
+        { label: "Male", value: "male" },
+        { label: "Female", value: "female" }
+      ],
+      ui: { displayMode: "segmented-control" },
+      validation: { isRequired: true }
+    }),
+    marriageStatus: (0, import_fields13.select)({
+      label: "Marriage Status",
+      options: [
+        { label: "Single", value: "single" },
+        { label: "Married", value: "married" }
+      ],
+      ui: { displayMode: "segmented-control" },
+      validation: { isRequired: true }
+    }),
+    email: (0, import_fields13.text)({
+      label: "Email",
+      validation: { isRequired: true, match: { regex: /^\S+@\S+$/ } },
+      isIndexed: "unique"
+    }),
+    resume: (0, import_fields13.file)({
+      label: "Resume",
+      storage: "resume_files"
+      // 👈 configure your storage in keystone.ts
+    }),
+    createdAt: (0, import_fields13.timestamp)({
+      defaultValue: { kind: "now" },
+      ui: { itemView: { fieldMode: "read" } }
+    })
+  }
+});
+
 // lists/index.ts
 var lists_default = {
   User: User_list_default,
@@ -561,7 +653,9 @@ var lists_default = {
   ReportImage: ReportImage_list_default,
   Award: Award_list_default,
   GalleryMedia: GalleryMedia_list_default,
-  Gallery: Gallery_list_default
+  Gallery: Gallery_list_default,
+  Comment: Comment_list_default,
+  Application: Application_list_default
 };
 
 // schema.ts
@@ -576,6 +670,8 @@ var lists = {
   ReportImage: lists_default.ReportImage,
   Award: lists_default.Award,
   GalleryMedia: lists_default.GalleryMedia,
+  Gallery: lists_default.Gallery,
+  Comment: lists_default.Comment,
   Gallery: lists_default.Gallery
   // Post: list({
   //   // WARNING
@@ -684,7 +780,7 @@ var session = (0, import_session.statelessSessions)({
 
 // keystone.ts
 var keystone_default = withAuth(
-  (0, import_core12.config)({
+  (0, import_core14.config)({
     db: {
       // we're using sqlite for the fastest startup experience
       //   for more information on what database might be appropriate for you
@@ -746,6 +842,13 @@ var keystone_default = withAuth(
         generateUrl: (path) => `/uploads/gallery/${path}`,
         serverRoute: { path: "/uploads/gallery" },
         storagePath: "public/uploads/gallery"
+      },
+      resume_files: {
+        kind: "local",
+        type: "file",
+        generateUrl: (path) => `/uploads/resume/${path}`,
+        serverRoute: { path: "/uploads/resume" },
+        storagePath: "public/uploads/resume"
       }
     },
     lists,

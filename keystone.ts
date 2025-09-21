@@ -81,6 +81,13 @@ export default withAuth(
         serverRoute: { path: "/uploads/gallery" },
         storagePath: "public/uploads/gallery",
       },
+      resume_files: {
+        kind: "local",
+        type: "file",
+        generateUrl: (path) => `/uploads/resume/${path}`,
+        serverRoute: { path: "/uploads/resume" },
+        storagePath: "public/uploads/resume",
+      },
     },
     lists,
     session,

@@ -9,6 +9,10 @@ import ReportImage from "./ReportImage.list";
 import Award from "./Award.list";
 import GalleryMedia from "./GalleryMedia.list";
 import Gallery from "./Gallery.list";
+import Comment  from "./Comment.list";
+import Application from "./Application.list";
+import Machine from "./Machine.list";
+import Staff from "./Staff.list";
 
 export default {
   User,
@@ -21,5 +25,9 @@ export default {
   ReportImage,
   Award,
   GalleryMedia,
-  Gallery
+  Gallery,
+  Comment,
+  Application,
+  Machine,
+  Staff
 };

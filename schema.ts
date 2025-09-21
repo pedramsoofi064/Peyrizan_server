@@ -24,7 +24,7 @@ import { document } from "@keystone-6/fields-document";
 
 // when using Typescript, you can refine your types to a stricter subset by importing
 // the generated types from '.keystone/types'
-import { type Lists  } from ".keystone/types";
+import { type Lists } from ".keystone/types";
 
 import AppList from "./lists/index";
 
@@ -40,7 +40,10 @@ export const lists = {
   Award: AppList.Award,
   GalleryMedia: AppList.GalleryMedia,
   Gallery: AppList.Gallery,
-
+  Comment: AppList.Comment,
+  Application: AppList.Application,
+  Machine: AppList.Machine,
+  Staff: AppList.Staff,
   // Post: list({
   //   // WARNING
   //   //   for this starter project, anyone can create, query, update and delete anything
@@ -54,18 +57,18 @@ export const lists = {
 
   //     // the document field can be used for making rich editable content
   //     //   you can find out more at https://keystonejs.com/docs/guides/document-fields
-      // content: document({
-      //   formatting: true,
-      //   layouts: [
-      //     [1, 1],
-      //     [1, 1, 1],
-      //     [2, 1],
-      //     [1, 2],
-      //     [1, 2, 1],
-      //   ],
-      //   links: true,
-      //   dividers: true,
-      // }),
+  // content: document({
+  //   formatting: true,
+  //   layouts: [
+  //     [1, 1],
+  //     [1, 1, 1],
+  //     [2, 1],
+  //     [1, 2],
+  //     [1, 2, 1],
+  //   ],
+  //   links: true,
+  //   dividers: true,
+  // }),
 
   //     // with this field, you can set a User as the author for a Post
   //     author: relationship({
