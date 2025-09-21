@@ -2,9 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/signin": "pages/signin.js",
   "/": "pages/index.js",
-  "/main-page-images": "pages/main-page-images.js",
-  "/main-page-images/[id]": "pages/main-page-images/[id].js",
-  "/report-images": "pages/report-images.js",
-  "/main-page-images/create": "pages/main-page-images/create.js"
+  "/galleries": "pages/galleries.js",
+  "/galleries/create": "pages/galleries/create.js"
 }

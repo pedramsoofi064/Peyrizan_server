@@ -73,6 +73,14 @@ export default withAuth(
         serverRoute: { path: "/uploads/news_" },
         storagePath: "public/uploads/news_",
       },
+
+      gallery_files: {
+        kind: "local",
+        type: "file",
+        generateUrl: (path) => `/uploads/gallery/${path}`,
+        serverRoute: { path: "/uploads/gallery" },
+        storagePath: "public/uploads/gallery",
+      },
     },
     lists,
     session,

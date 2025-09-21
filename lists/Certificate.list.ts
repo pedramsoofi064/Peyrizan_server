@@ -1,6 +1,6 @@
 import { list } from "@keystone-6/core";
 import { allowAll } from "@keystone-6/core/access";
-import { text, image } from "@keystone-6/core/fields";
+import { text, image , timestamp } from "@keystone-6/core/fields";
 
 export default list({
   access: allowAll,
@@ -22,9 +22,10 @@ export default list({
       label: "عنوان (انگلیسی)",
       ui: { description: "اختیاری" },
     }),
-    file: image({
+    image: image({
       label: "تصویر گواهینامه",
       storage: "certificate_images",
     }),
+    date: timestamp({ label: "تاریخ", validation: { isRequired: true } }),
   },
 });

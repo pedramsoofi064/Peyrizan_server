@@ -33,7 +33,7 @@ __export(keystone_exports, {
   default: () => keystone_default
 });
 module.exports = __toCommonJS(keystone_exports);
-var import_core9 = require("@keystone-6/core");
+var import_core12 = require("@keystone-6/core");
 
 // lists/Image.list.ts
 var import_core = require("@keystone-6/core");
@@ -273,10 +273,11 @@ var Certificate_list_default = (0, import_core6.list)({
       label: "\u0639\u0646\u0648\u0627\u0646 (\u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC)",
       ui: { description: "\u0627\u062E\u062A\u06CC\u0627\u0631\u06CC" }
     }),
-    file: (0, import_fields6.image)({
+    image: (0, import_fields6.image)({
       label: "\u062A\u0635\u0648\u06CC\u0631 \u06AF\u0648\u0627\u0647\u06CC\u0646\u0627\u0645\u0647",
       storage: "certificate_images"
-    })
+    }),
+    date: (0, import_fields6.timestamp)({ label: "\u062A\u0627\u0631\u06CC\u062E", validation: { isRequired: true } })
   }
 });
 
@@ -448,28 +449,134 @@ var ReportImage_list_default = (0, import_core8.list)({
   }
 });
 
+// lists/Award.list.ts
+var import_core9 = require("@keystone-6/core");
+var import_access9 = require("@keystone-6/core/access");
+var import_fields9 = require("@keystone-6/core/fields");
+var Award_list_default = (0, import_core9.list)({
+  access: import_access9.allowAll,
+  ui: {
+    label: "\u062A\u0642\u062F\u06CC\u0631\u0646\u0627\u0645\u0647 \u0647\u0627",
+    listView: {
+      initialColumns: ["titleFa", "titleEn", "file"],
+      initialSort: { field: "titleFa", direction: "ASC" },
+      pageSize: 20
+    }
+  },
+  fields: {
+    titleFa: (0, import_fields9.text)({
+      label: "\u0639\u0646\u0648\u0627\u0646 (\u0641\u0627\u0631\u0633\u06CC)",
+      validation: { isRequired: true },
+      ui: { description: "\u0639\u0646\u0648\u0627\u0646 \u062A\u0642\u062F\u06CC\u0631\u0646\u0627\u0645\u0647 \u0628\u0647 \u0632\u0628\u0627\u0646 \u0641\u0627\u0631\u0633\u06CC" }
+    }),
+    titleEn: (0, import_fields9.text)({
+      label: "\u0639\u0646\u0648\u0627\u0646 (\u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC)",
+      ui: { description: "\u0627\u062E\u062A\u06CC\u0627\u0631\u06CC" }
+    }),
+    image: (0, import_fields9.image)({
+      label: "\u062A\u0635\u0648\u06CC\u0631 \u062A\u0642\u062F\u06CC\u0631\u0646\u0627\u0645\u0647",
+      storage: "certificate_images"
+    }),
+    date: (0, import_fields9.timestamp)({ label: "\u062A\u0627\u0631\u06CC\u062E", validation: { isRequired: true } })
+  }
+});
+
+// lists/GalleryMedia.list.ts
+var import_core10 = require("@keystone-6/core");
+var import_access10 = require("@keystone-6/core/access");
+var import_fields10 = require("@keystone-6/core/fields");
+var GalleryMedia_list_default = (0, import_core10.list)({
+  access: import_access10.allowAll,
+  ui: {
+    label: "\u0645\u062F\u06CC\u0627\u0647\u0627\u06CC \u06AF\u0627\u0644\u0631\u06CC",
+    listView: {
+      initialColumns: ["file", "type", "sortOrder", "gallery"],
+      initialSort: { field: "sortOrder", direction: "ASC" }
+    }
+  },
+  fields: {
+    file: (0, import_fields10.file)({
+      label: "\u0641\u0627\u06CC\u0644 (\u0639\u06A9\u0633 \u06CC\u0627 \u0648\u06CC\u062F\u06CC\u0648)",
+      storage: "gallery_files"
+    }),
+    type: (0, import_fields10.select)({
+      label: "\u0646\u0648\u0639",
+      options: [
+        { label: "\u062A\u0635\u0648\u06CC\u0631", value: "image" },
+        { label: "\u0648\u06CC\u062F\u06CC\u0648", value: "video" }
+      ],
+      defaultValue: "image",
+      ui: { displayMode: "segmented-control" }
+    }),
+    sortOrder: (0, import_fields10.integer)({ label: "\u062A\u0631\u062A\u06CC\u0628", defaultValue: 0 }),
+    gallery: (0, import_fields10.relationship)({ ref: "Gallery.medias", label: "\u06AF\u0627\u0644\u0631\u06CC" })
+  }
+});
+
+// lists/Gallery.list.ts
+var import_core11 = require("@keystone-6/core");
+var import_access11 = require("@keystone-6/core/access");
+var import_fields11 = require("@keystone-6/core/fields");
+var Gallery_list_default = (0, import_core11.list)({
+  access: import_access11.allowAll,
+  ui: {
+    label: "\u06AF\u0627\u0644\u0631\u06CC",
+    listView: {
+      initialColumns: ["titleFa", "date", "medias"],
+      pageSize: 20,
+      initialSort: { field: "date", direction: "DESC" }
+    }
+  },
+  fields: {
+    titleFa: (0, import_fields11.text)({ label: "\u0639\u0646\u0648\u0627\u0646 (\u0641\u0627\u0631\u0633\u06CC)", validation: { isRequired: true } }),
+    titleEn: (0, import_fields11.text)({ label: "\u0639\u0646\u0648\u0627\u0646 (\u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC)" }),
+    descriptionFa: (0, import_fields11.text)({ label: "\u062A\u0648\u0636\u06CC\u062D\u0627\u062A (\u0641\u0627\u0631\u0633\u06CC)", ui: { displayMode: "textarea" } }),
+    descriptionEn: (0, import_fields11.text)({ label: "\u062A\u0648\u0636\u06CC\u062D\u0627\u062A (\u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC)", ui: { displayMode: "textarea" } }),
+    date: (0, import_fields11.timestamp)({ label: "\u062A\u0627\u0631\u06CC\u062E", validation: { isRequired: true } }),
+    medias: (0, import_fields11.relationship)({
+      ref: "GalleryMedia.gallery",
+      many: true,
+      label: "\u0645\u062F\u06CC\u0627\u0647\u0627",
+      ui: {
+        displayMode: "cards",
+        cardFields: ["file", "type", "sortOrder"],
+        inlineCreate: { fields: ["file", "type", "sortOrder"] },
+        inlineEdit: { fields: ["file", "type", "sortOrder"] },
+        linkToItem: true,
+        removeMode: "disconnect"
+      }
+    })
+  }
+});
+
 // lists/index.ts
 var lists_default = {
-  Image: Image_list_default,
   User: User_list_default,
+  Image: Image_list_default,
   MainPageImage: MainPageImage_list_default,
   Project: Project_list_default,
   ProjectImage: ProjectImage_list_default,
   Certificate: Certificate_list_default,
   Report: Report_list_default,
-  ReportImage: ReportImage_list_default
+  ReportImage: ReportImage_list_default,
+  Award: Award_list_default,
+  GalleryMedia: GalleryMedia_list_default,
+  Gallery: Gallery_list_default
 };
 
 // schema.ts
 var lists = {
-  Image: lists_default.Image,
   User: lists_default.User,
+  Image: lists_default.Image,
   MainPageImage: lists_default.MainPageImage,
   Project: lists_default.Project,
   ProjectImage: lists_default.ProjectImage,
   Certificate: lists_default.Certificate,
   Report: lists_default.Report,
-  ReportImage: lists_default.ReportImage
+  ReportImage: lists_default.ReportImage,
+  Award: lists_default.Award,
+  GalleryMedia: lists_default.GalleryMedia,
+  Gallery: lists_default.Gallery
   // Post: list({
   //   // WARNING
   //   //   for this starter project, anyone can create, query, update and delete anything
@@ -577,7 +684,7 @@ var session = (0, import_session.statelessSessions)({
 
 // keystone.ts
 var keystone_default = withAuth(
-  (0, import_core9.config)({
+  (0, import_core12.config)({
     db: {
       // we're using sqlite for the fastest startup experience
       //   for more information on what database might be appropriate for you
@@ -632,6 +739,13 @@ var keystone_default = withAuth(
         generateUrl: (path) => `/uploads/news_/${path}`,
         serverRoute: { path: "/uploads/news_" },
         storagePath: "public/uploads/news_"
+      },
+      gallery_files: {
+        kind: "local",
+        type: "file",
+        generateUrl: (path) => `/uploads/gallery/${path}`,
+        serverRoute: { path: "/uploads/gallery" },
+        storagePath: "public/uploads/gallery"
       }
     },
     lists,

@@ -27,25 +27,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/main-page-images": [
+    "/galleries": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/main-page-images.js"
+      "static/chunks/pages/galleries.js"
     ],
-    "/main-page-images/[id]": [
+    "/galleries/create": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/main-page-images/[id].js"
+      "static/chunks/pages/galleries/create.js"
     ],
-    "/main-page-images/create": [
+    "/signin": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/main-page-images/create.js"
-    ],
-    "/report-images": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/report-images.js"
+      "static/chunks/pages/signin.js"
     ]
   },
   "ampFirstPages": []
