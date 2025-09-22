@@ -33,7 +33,7 @@ __export(keystone_exports, {
   default: () => keystone_default
 });
 module.exports = __toCommonJS(keystone_exports);
-var import_core14 = require("@keystone-6/core");
+var import_core16 = require("@keystone-6/core");
 
 // lists/Image.list.ts
 var import_core = require("@keystone-6/core");
@@ -559,7 +559,7 @@ var Comment_list_default = (0, import_core12.list)({
   ui: {
     label: "\u0646\u0638\u0631\u0627\u062A \u06A9\u0627\u0631\u0628\u0631\u0627\u0646",
     listView: {
-      initialColumns: ["firstName", "lastName", "email", "createdAt"],
+      initialColumns: ["firstName", "lastName", "email", "createdAt", "message"],
       initialSort: { field: "createdAt", direction: "DESC" }
     }
   },
@@ -568,8 +568,7 @@ var Comment_list_default = (0, import_core12.list)({
     lastName: (0, import_fields12.text)({ label: "\u0646\u0627\u0645 \u062E\u0627\u0646\u0648\u0627\u062F\u06AF\u06CC", validation: { isRequired: true } }),
     email: (0, import_fields12.text)({
       label: "\u0627\u06CC\u0645\u06CC\u0644",
-      validation: { isRequired: true, match: { regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ } },
-      isIndexed: "unique"
+      validation: { isRequired: true, match: { regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ } }
     }),
     message: (0, import_fields12.text)({
       label: "\u067E\u06CC\u0627\u0645",
@@ -592,7 +591,7 @@ var Application_list_default = (0, import_core13.list)({
   access: import_access13.allowAll,
   // 🔒 Consider restricting for production
   ui: {
-    label: "Application Form",
+    label: "\u0631\u062F\u062E\u0648\u0627\u0633\u062A \u0647\u0645\u06A9\u0627\u0631\u06CC",
     listView: {
       initialColumns: ["fullName", "email", "gender", "marriageStatus", "createdAt"]
     }
@@ -641,6 +640,69 @@ var Application_list_default = (0, import_core13.list)({
   }
 });
 
+// lists/Machine.list.ts
+var import_core14 = require("@keystone-6/core");
+var import_access14 = require("@keystone-6/core/access");
+var import_fields14 = require("@keystone-6/core/fields");
+var Machine_list_default = (0, import_core14.list)({
+  access: import_access14.allowAll,
+  // 🔒 restrict in production
+  ui: {
+    label: "\u0645\u0627\u0634\u06CC\u0646\u200C\u0622\u0644\u0627\u062A",
+    listView: {
+      initialColumns: ["titleFa", "titleEn", "count"],
+      initialSort: { field: "titleFa", direction: "ASC" }
+    }
+  },
+  fields: {
+    titleFa: (0, import_fields14.text)({
+      label: "\u0639\u0646\u0648\u0627\u0646 (\u0641\u0627\u0631\u0633\u06CC)",
+      validation: { isRequired: true }
+    }),
+    titleEn: (0, import_fields14.text)({
+      label: "\u0639\u0646\u0648\u0627\u0646 (\u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC)",
+      validation: { isRequired: true }
+    }),
+    count: (0, import_fields14.integer)({
+      label: "\u062A\u0639\u062F\u0627\u062F",
+      validation: {
+        isRequired: true,
+        min: 0
+      }
+    })
+  }
+});
+
+// lists/Employee.list.ts
+var import_core15 = require("@keystone-6/core");
+var import_access15 = require("@keystone-6/core/access");
+var import_fields15 = require("@keystone-6/core/fields");
+var Employee_list_default = (0, import_core15.list)({
+  access: import_access15.allowAll,
+  // 🔒 adjust for production
+  ui: {
+    label: "\u067E\u0631\u0633\u0646\u0644",
+    listView: {
+      initialColumns: ["fullNameFa", "fullNameEn", "position"],
+      initialSort: { field: "fullNameFa", direction: "ASC" }
+    }
+  },
+  fields: {
+    fullNameFa: (0, import_fields15.text)({
+      label: "\u0646\u0627\u0645 \u06A9\u0627\u0645\u0644 (\u0641\u0627\u0631\u0633\u06CC)",
+      validation: { isRequired: true }
+    }),
+    fullNameEn: (0, import_fields15.text)({
+      label: "Full Name (English)",
+      validation: { isRequired: true }
+    }),
+    position: (0, import_fields15.text)({
+      label: "\u0633\u0645\u062A",
+      validation: { isRequired: true }
+    })
+  }
+});
+
 // lists/index.ts
 var lists_default = {
   User: User_list_default,
@@ -655,7 +717,9 @@ var lists_default = {
   GalleryMedia: GalleryMedia_list_default,
   Gallery: Gallery_list_default,
   Comment: Comment_list_default,
-  Application: Application_list_default
+  Application: Application_list_default,
+  Machine: Machine_list_default,
+  Employee: Employee_list_default
 };
 
 // schema.ts
@@ -672,7 +736,9 @@ var lists = {
   GalleryMedia: lists_default.GalleryMedia,
   Gallery: lists_default.Gallery,
   Comment: lists_default.Comment,
-  Gallery: lists_default.Gallery
+  Application: lists_default.Application,
+  Employee: lists_default.Employee,
+  Machine: lists_default.Machine
   // Post: list({
   //   // WARNING
   //   //   for this starter project, anyone can create, query, update and delete anything
@@ -780,7 +846,7 @@ var session = (0, import_session.statelessSessions)({
 
 // keystone.ts
 var keystone_default = withAuth(
-  (0, import_core14.config)({
+  (0, import_core16.config)({
     db: {
       // we're using sqlite for the fastest startup experience
       //   for more information on what database might be appropriate for you

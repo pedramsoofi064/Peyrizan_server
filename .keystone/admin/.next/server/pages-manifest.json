@@ -4,6 +4,5 @@
   "/_document": "pages/_document.js",
   "/signin": "pages/signin.js",
   "/": "pages/index.js",
-  "/galleries": "pages/galleries.js",
-  "/galleries/create": "pages/galleries/create.js"
+  "/comments": "pages/comments.js"
 }

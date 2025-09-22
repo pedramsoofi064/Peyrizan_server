@@ -24,15 +24,10 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/galleries": [
+    "/comments": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/galleries.js"
-    ],
-    "/galleries/create": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/galleries/create.js"
+      "static/chunks/pages/comments.js"
     ],
     "/signin": [
       "static/chunks/webpack.js",

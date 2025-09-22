@@ -6,7 +6,7 @@ import { text, select, calendarDay, file, timestamp } from "@keystone-6/core/fie
 export default list({
   access: allowAll, // 🔒 Consider restricting for production
   ui: {
-    label: "Application Form",
+    label: "ردخواست همکاری",
     listView: {
       initialColumns: ["fullName", "email", "gender", "marriageStatus", "createdAt"],
     },

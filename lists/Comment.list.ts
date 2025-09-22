@@ -7,7 +7,7 @@ export default list({
   ui: {
     label: "نظرات کاربران",
     listView: {
-      initialColumns: ["firstName", "lastName", "email", "createdAt"],
+      initialColumns: ["firstName", "lastName", "email", "createdAt" , "message"],
       initialSort: { field: "createdAt", direction: "DESC" },
     },
   },
@@ -17,7 +17,6 @@ export default list({
     email: text({
       label: "ایمیل",
       validation: { isRequired: true, match: { regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ } },
-      isIndexed: "unique",
     }),
     message: text({
       label: "پیام",

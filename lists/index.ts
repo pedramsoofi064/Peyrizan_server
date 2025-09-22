@@ -12,7 +12,7 @@ import Gallery from "./Gallery.list";
 import Comment  from "./Comment.list";
 import Application from "./Application.list";
 import Machine from "./Machine.list";
-import Staff from "./Staff.list";
+import Employee from "./Employee.list";
 
 export default {
   User,
@@ -29,5 +29,5 @@ export default {
   Comment,
   Application,
   Machine,
-  Staff
+  Employee
 };

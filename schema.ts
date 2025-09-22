@@ -42,8 +42,8 @@ export const lists = {
   Gallery: AppList.Gallery,
   Comment: AppList.Comment,
   Application: AppList.Application,
+  Employee: AppList.Employee,
   Machine: AppList.Machine,
-  Staff: AppList.Staff,
   // Post: list({
   //   // WARNING
   //   //   for this starter project, anyone can create, query, update and delete anything

@@ -794,6 +794,239 @@ input GalleryMediaRelateToManyForCreateInput {
   connect: [GalleryMediaWhereUniqueInput!]
 }
 
+type Comment {
+  id: ID!
+  firstName: String
+  lastName: String
+  email: String
+  message: String
+  createdAt: DateTime
+}
+
+input CommentWhereUniqueInput {
+  id: ID
+}
+
+input CommentWhereInput {
+  AND: [CommentWhereInput!]
+  OR: [CommentWhereInput!]
+  NOT: [CommentWhereInput!]
+  id: IDFilter
+  firstName: StringFilter
+  lastName: StringFilter
+  email: StringFilter
+  message: StringFilter
+  createdAt: DateTimeNullableFilter
+}
+
+input CommentOrderByInput {
+  id: OrderDirection
+  firstName: OrderDirection
+  lastName: OrderDirection
+  email: OrderDirection
+  message: OrderDirection
+  createdAt: OrderDirection
+}
+
+input CommentUpdateInput {
+  firstName: String
+  lastName: String
+  email: String
+  message: String
+  createdAt: DateTime
+}
+
+input CommentUpdateArgs {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateInput!
+}
+
+input CommentCreateInput {
+  firstName: String
+  lastName: String
+  email: String
+  message: String
+  createdAt: DateTime
+}
+
+type Application {
+  id: ID!
+  fullName: String
+  birthDate: CalendarDay
+  gender: String
+  marriageStatus: String
+  email: String
+  resume: FileFieldOutput
+  createdAt: DateTime
+}
+
+scalar CalendarDay @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
+
+input ApplicationWhereUniqueInput {
+  id: ID
+  email: String
+}
+
+input ApplicationWhereInput {
+  AND: [ApplicationWhereInput!]
+  OR: [ApplicationWhereInput!]
+  NOT: [ApplicationWhereInput!]
+  id: IDFilter
+  fullName: StringFilter
+  birthDate: CalendarDayFilter
+  gender: StringFilter
+  marriageStatus: StringFilter
+  email: StringFilter
+  createdAt: DateTimeNullableFilter
+}
+
+input CalendarDayFilter {
+  equals: CalendarDay
+  in: [CalendarDay!]
+  notIn: [CalendarDay!]
+  lt: CalendarDay
+  lte: CalendarDay
+  gt: CalendarDay
+  gte: CalendarDay
+  not: CalendarDayFilter
+}
+
+input ApplicationOrderByInput {
+  id: OrderDirection
+  fullName: OrderDirection
+  birthDate: OrderDirection
+  gender: OrderDirection
+  marriageStatus: OrderDirection
+  email: OrderDirection
+  createdAt: OrderDirection
+}
+
+input ApplicationUpdateInput {
+  fullName: String
+  birthDate: CalendarDay
+  gender: String
+  marriageStatus: String
+  email: String
+  resume: FileFieldInput
+  createdAt: DateTime
+}
+
+input ApplicationUpdateArgs {
+  where: ApplicationWhereUniqueInput!
+  data: ApplicationUpdateInput!
+}
+
+input ApplicationCreateInput {
+  fullName: String
+  birthDate: CalendarDay
+  gender: String
+  marriageStatus: String
+  email: String
+  resume: FileFieldInput
+  createdAt: DateTime
+}
+
+type Employee {
+  id: ID!
+  fullNameFa: String
+  fullNameEn: String
+  position: String
+}
+
+input EmployeeWhereUniqueInput {
+  id: ID
+}
+
+input EmployeeWhereInput {
+  AND: [EmployeeWhereInput!]
+  OR: [EmployeeWhereInput!]
+  NOT: [EmployeeWhereInput!]
+  id: IDFilter
+  fullNameFa: StringFilter
+  fullNameEn: StringFilter
+  position: StringFilter
+}
+
+input EmployeeOrderByInput {
+  id: OrderDirection
+  fullNameFa: OrderDirection
+  fullNameEn: OrderDirection
+  position: OrderDirection
+}
+
+input EmployeeUpdateInput {
+  fullNameFa: String
+  fullNameEn: String
+  position: String
+}
+
+input EmployeeUpdateArgs {
+  where: EmployeeWhereUniqueInput!
+  data: EmployeeUpdateInput!
+}
+
+input EmployeeCreateInput {
+  fullNameFa: String
+  fullNameEn: String
+  position: String
+}
+
+type Machine {
+  id: ID!
+  titleFa: String
+  titleEn: String
+  count: Int
+}
+
+input MachineWhereUniqueInput {
+  id: ID
+}
+
+input MachineWhereInput {
+  AND: [MachineWhereInput!]
+  OR: [MachineWhereInput!]
+  NOT: [MachineWhereInput!]
+  id: IDFilter
+  titleFa: StringFilter
+  titleEn: StringFilter
+  count: IntFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntFilter
+}
+
+input MachineOrderByInput {
+  id: OrderDirection
+  titleFa: OrderDirection
+  titleEn: OrderDirection
+  count: OrderDirection
+}
+
+input MachineUpdateInput {
+  titleFa: String
+  titleEn: String
+  count: Int
+}
+
+input MachineUpdateArgs {
+  where: MachineWhereUniqueInput!
+  data: MachineUpdateInput!
+}
+
+input MachineCreateInput {
+  titleFa: String
+  titleEn: String
+  count: Int
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -866,6 +1099,30 @@ type Mutation {
   updateGalleries(data: [GalleryUpdateArgs!]!): [Gallery]
   deleteGallery(where: GalleryWhereUniqueInput!): Gallery
   deleteGalleries(where: [GalleryWhereUniqueInput!]!): [Gallery]
+  createComment(data: CommentCreateInput!): Comment
+  createComments(data: [CommentCreateInput!]!): [Comment]
+  updateComment(where: CommentWhereUniqueInput!, data: CommentUpdateInput!): Comment
+  updateComments(data: [CommentUpdateArgs!]!): [Comment]
+  deleteComment(where: CommentWhereUniqueInput!): Comment
+  deleteComments(where: [CommentWhereUniqueInput!]!): [Comment]
+  createApplication(data: ApplicationCreateInput!): Application
+  createApplications(data: [ApplicationCreateInput!]!): [Application]
+  updateApplication(where: ApplicationWhereUniqueInput!, data: ApplicationUpdateInput!): Application
+  updateApplications(data: [ApplicationUpdateArgs!]!): [Application]
+  deleteApplication(where: ApplicationWhereUniqueInput!): Application
+  deleteApplications(where: [ApplicationWhereUniqueInput!]!): [Application]
+  createEmployee(data: EmployeeCreateInput!): Employee
+  createEmployees(data: [EmployeeCreateInput!]!): [Employee]
+  updateEmployee(where: EmployeeWhereUniqueInput!, data: EmployeeUpdateInput!): Employee
+  updateEmployees(data: [EmployeeUpdateArgs!]!): [Employee]
+  deleteEmployee(where: EmployeeWhereUniqueInput!): Employee
+  deleteEmployees(where: [EmployeeWhereUniqueInput!]!): [Employee]
+  createMachine(data: MachineCreateInput!): Machine
+  createMachines(data: [MachineCreateInput!]!): [Machine]
+  updateMachine(where: MachineWhereUniqueInput!, data: MachineUpdateInput!): Machine
+  updateMachines(data: [MachineUpdateArgs!]!): [Machine]
+  deleteMachine(where: MachineWhereUniqueInput!): Machine
+  deleteMachines(where: [MachineWhereUniqueInput!]!): [Machine]
   endSession: Boolean!
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -922,6 +1179,18 @@ type Query {
   gallery(where: GalleryWhereUniqueInput!): Gallery
   galleries(where: GalleryWhereInput! = {}, orderBy: [GalleryOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: GalleryWhereUniqueInput): [Gallery!]
   galleriesCount(where: GalleryWhereInput! = {}): Int
+  comment(where: CommentWhereUniqueInput!): Comment
+  comments(where: CommentWhereInput! = {}, orderBy: [CommentOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: CommentWhereUniqueInput): [Comment!]
+  commentsCount(where: CommentWhereInput! = {}): Int
+  application(where: ApplicationWhereUniqueInput!): Application
+  applications(where: ApplicationWhereInput! = {}, orderBy: [ApplicationOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ApplicationWhereUniqueInput): [Application!]
+  applicationsCount(where: ApplicationWhereInput! = {}): Int
+  employee(where: EmployeeWhereUniqueInput!): Employee
+  employees(where: EmployeeWhereInput! = {}, orderBy: [EmployeeOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: EmployeeWhereUniqueInput): [Employee!]
+  employeesCount(where: EmployeeWhereInput! = {}): Int
+  machine(where: MachineWhereUniqueInput!): Machine
+  machines(where: MachineWhereInput! = {}, orderBy: [MachineOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: MachineWhereUniqueInput): [Machine!]
+  machinesCount(where: MachineWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }
