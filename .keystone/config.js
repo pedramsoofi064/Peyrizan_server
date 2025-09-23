@@ -360,6 +360,7 @@ var Report_list_default = (0, import_core7.list)({
   ui: {
     label: "\u0627\u062E\u0628\u0627\u0631",
     description: "\u062A\u0645\u0627\u0645 \u0627\u062E\u0628\u0627\u0631 ",
+    labelField: "titleFa",
     listView: {
       pageSize: 20,
       initialColumns: ["titleFa", "date", "file"],
@@ -368,7 +369,7 @@ var Report_list_default = (0, import_core7.list)({
   },
   access: import_access7.allowAll,
   fields: {
-    titleFa: (0, import_fields7.text)({ label: "\u0639\u0646\u0648\u0627\u0646 \u0628\u0647 \u0641\u0627\u0631\u0633\u06CC" }),
+    titleFa: (0, import_fields7.text)({ label: "\u0639\u0646\u0648\u0627\u0646 \u0628\u0647 \u0641\u0627\u0631\u0633\u06CC", validation: { isRequired: true } }),
     titleEn: (0, import_fields7.text)({ label: "\u0639\u0646\u0648\u0627\u0646 \u0628\u0647 \u0627\u0646\u06AF\u0644\u06CC\u0633\u06CC" }),
     summaryFa: (0, import_fields7.text)({
       label: "\u062E\u0644\u0627\u0635\u0647 \u0628\u0647 \u0641\u0627\u0631\u0633\u06CC",
@@ -425,7 +426,31 @@ var Report_list_default = (0, import_core7.list)({
       componentBlocks
     }),
     date: (0, import_fields7.timestamp)({ label: "\u062A\u0627\u0631\u06CC\u062E", validation: { isRequired: true } }),
-    file: (0, import_fields7.image)({ label: "\u062A\u0635\u0648\u06CC\u0631 \u0627\u0635\u0644\u06CC \u062E\u0628\u0631", storage: "news_images" })
+    file: (0, import_fields7.image)({ label: "\u062A\u0635\u0648\u06CC\u0631 \u0627\u0635\u0644\u06CC \u062E\u0628\u0631", storage: "news_images" }),
+    // Self one-to-one relation: visible side
+    relatedReport: (0, import_fields7.relationship)({
+      label: "\u062E\u0628\u0631 \u0645\u0631\u062A\u0628\u0637",
+      ref: "Report.relatedReportOf",
+      many: false,
+      ui: {
+        displayMode: "cards",
+        cardFields: ["titleFa", "date"],
+        inlineConnect: true,
+        linkToItem: true,
+        removeMode: "disconnect"
+      }
+    }),
+    // Self one-to-one relation: hidden inverse side to satisfy Prisma
+    relatedReportOf: (0, import_fields7.relationship)({
+      ref: "Report.relatedReport",
+      many: false,
+      ui: {
+        labelField: "titleFa",
+        createView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "hidden" }
+      },
+      graphql: { omit: true }
+    })
   }
 });
 
@@ -591,49 +616,52 @@ var Application_list_default = (0, import_core13.list)({
   access: import_access13.allowAll,
   // 🔒 Consider restricting for production
   ui: {
-    label: "\u0631\u062F\u062E\u0648\u0627\u0633\u062A \u0647\u0645\u06A9\u0627\u0631\u06CC",
+    label: "\u062F\u0631\u062E\u0648\u0627\u0633\u062A \u0647\u0645\u06A9\u0627\u0631\u06CC",
     listView: {
-      initialColumns: ["fullName", "email", "gender", "marriageStatus", "createdAt"]
+      initialColumns: [
+        "fullName",
+        "email",
+        "gender",
+        "marriageStatus",
+        "createdAt"
+      ]
     }
   },
   fields: {
     fullName: (0, import_fields13.text)({
-      label: "Full Name",
+      label: "\u0646\u0627\u0645 \u06A9\u0627\u0645\u0644",
       validation: { isRequired: true }
     }),
     birthDate: (0, import_fields13.calendarDay)({
-      label: "Birth Date",
-      validation: { isRequired: true }
+      label: "\u062A\u0627\u0631\u06CC\u062E \u062A\u0648\u0644\u062F"
     }),
     gender: (0, import_fields13.select)({
-      label: "Gender",
+      label: "\u062C\u0646\u0633\u06CC\u062A",
       options: [
-        { label: "Male", value: "male" },
-        { label: "Female", value: "female" }
+        { label: "\u0645\u0631\u062F", value: "male" },
+        { label: "\u0632\u0646", value: "female" }
       ],
-      ui: { displayMode: "segmented-control" },
-      validation: { isRequired: true }
+      ui: { displayMode: "segmented-control" }
     }),
     marriageStatus: (0, import_fields13.select)({
-      label: "Marriage Status",
+      label: "\u0648\u0636\u0639\u06CC\u062A \u062A\u0627\u0647\u0644",
       options: [
-        { label: "Single", value: "single" },
-        { label: "Married", value: "married" }
+        { label: "\u0645\u062C\u0631\u062F", value: "single" },
+        { label: "\u0645\u062A\u0627\u0647\u0644", value: "married" }
       ],
-      ui: { displayMode: "segmented-control" },
-      validation: { isRequired: true }
+      ui: { displayMode: "segmented-control" }
     }),
     email: (0, import_fields13.text)({
-      label: "Email",
-      validation: { isRequired: true, match: { regex: /^\S+@\S+$/ } },
-      isIndexed: "unique"
+      label: "\u067E\u0633\u062A \u0627\u0644\u06A9\u0646\u0631\u0648\u0646\u06CC\u06A9\u06CC",
+      validation: { isRequired: true, match: { regex: /^\S+@\S+$/ } }
     }),
     resume: (0, import_fields13.file)({
-      label: "Resume",
+      label: "\u0631\u0632\u0648\u0645\u0647",
       storage: "resume_files"
       // 👈 configure your storage in keystone.ts
     }),
     createdAt: (0, import_fields13.timestamp)({
+      label: "\u062A\u0627\u0631\u06CC\u062E \u0627\u06CC\u062C\u0627\u062F",
       defaultValue: { kind: "now" },
       ui: { itemView: { fieldMode: "read" } }
     })
@@ -853,6 +881,14 @@ var keystone_default = withAuth(
       //   see https://keystonejs.com/docs/guides/choosing-a-database#title
       provider: "sqlite",
       url: "file:./keystone.db"
+    },
+    server: {
+      cors: {
+        origin: ["http://localhost:3003"],
+        // your Vite dev URL
+        credentials: true
+        // if you send cookies
+      }
     },
     storage: {
       main_images: {

@@ -1,59 +1,69 @@
 // lists/Application.ts
 import { list } from "@keystone-6/core";
 import { allowAll } from "@keystone-6/core/access";
-import { text, select, calendarDay, file, timestamp } from "@keystone-6/core/fields";
+import {
+  text,
+  select,
+  calendarDay,
+  file,
+  timestamp,
+} from "@keystone-6/core/fields";
 
 export default list({
   access: allowAll, // 🔒 Consider restricting for production
   ui: {
-    label: "ردخواست همکاری",
+    label: "درخواست همکاری",
     listView: {
-      initialColumns: ["fullName", "email", "gender", "marriageStatus", "createdAt"],
+      initialColumns: [
+        "fullName",
+        "email",
+        "gender",
+        "marriageStatus",
+        "createdAt",
+      ],
     },
   },
   fields: {
     fullName: text({
-      label: "Full Name",
+      label: "نام کامل",
       validation: { isRequired: true },
     }),
 
     birthDate: calendarDay({
-      label: "Birth Date",
-      validation: { isRequired: true },
+      label: "تاریخ تولد",
     }),
 
     gender: select({
-      label: "Gender",
+      label: "جنسیت",
       options: [
-        { label: "Male", value: "male" },
-        { label: "Female", value: "female" },
+        { label: "مرد", value: "male" },
+        { label: "زن", value: "female" },
       ],
       ui: { displayMode: "segmented-control" },
-      validation: { isRequired: true },
     }),
 
     marriageStatus: select({
-      label: "Marriage Status",
+      label: "وضعیت تاهل",
       options: [
-        { label: "Single", value: "single" },
-        { label: "Married", value: "married" },
+        { label: "مجرد", value: "single" },
+        { label: "متاهل", value: "married" },
       ],
       ui: { displayMode: "segmented-control" },
-      validation: { isRequired: true },
     }),
 
     email: text({
-      label: "Email",
+      label: "پست الکنرونیکی",
       validation: { isRequired: true, match: { regex: /^\S+@\S+$/ } },
-      isIndexed: "unique",
     }),
 
     resume: file({
-      label: "Resume",
+      label: "رزومه",
       storage: "resume_files", // 👈 configure your storage in keystone.ts
     }),
 
     createdAt: timestamp({
+      label: "تاریخ ایجاد",
+
       defaultValue: { kind: "now" },
       ui: { itemView: { fieldMode: "read" } },
     }),

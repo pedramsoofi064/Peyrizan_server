@@ -9,11 +9,6 @@ self.__BUILD_MANIFEST = {
   "lowPriorityFiles": [],
   "rootMainFiles": [],
   "pages": {
-    "/": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/index.js"
-    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -24,15 +19,25 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/comments": [
+    "/applications": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/comments.js"
+      "static/chunks/pages/applications.js"
     ],
-    "/signin": [
+    "/machines": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/signin.js"
+      "static/chunks/pages/machines.js"
+    ],
+    "/machines/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/machines/[id].js"
+    ],
+    "/machines/create": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/machines/create.js"
     ]
   },
   "ampFirstPages": []

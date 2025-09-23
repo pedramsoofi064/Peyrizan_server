@@ -500,6 +500,7 @@ type Report {
   descriptionEn: Report_descriptionEn_Document
   date: DateTime
   file: ImageFieldOutput
+  relatedReport: Report
 }
 
 type Report_descriptionFa_Document {
@@ -512,6 +513,7 @@ type Report_descriptionEn_Document {
 
 input ReportWhereUniqueInput {
   id: ID
+  relatedReport: ReportWhereUniqueInput
 }
 
 input ReportWhereInput {
@@ -524,6 +526,7 @@ input ReportWhereInput {
   summaryFa: StringFilter
   summaryEn: StringFilter
   date: DateTimeFilter
+  relatedReport: ReportWhereInput
 }
 
 input ReportOrderByInput {
@@ -544,6 +547,13 @@ input ReportUpdateInput {
   descriptionEn: JSON
   date: DateTime
   file: ImageFieldInput
+  relatedReport: ReportRelateToOneForUpdateInput
+}
+
+input ReportRelateToOneForUpdateInput {
+  create: ReportCreateInput
+  connect: ReportWhereUniqueInput
+  disconnect: Boolean
 }
 
 input ReportUpdateArgs {
@@ -560,6 +570,12 @@ input ReportCreateInput {
   descriptionEn: JSON
   date: DateTime
   file: ImageFieldInput
+  relatedReport: ReportRelateToOneForCreateInput
+}
+
+input ReportRelateToOneForCreateInput {
+  create: ReportCreateInput
+  connect: ReportWhereUniqueInput
 }
 
 type ReportImage {
@@ -864,7 +880,6 @@ scalar CalendarDay @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3
 
 input ApplicationWhereUniqueInput {
   id: ID
-  email: String
 }
 
 input ApplicationWhereInput {
@@ -873,14 +888,14 @@ input ApplicationWhereInput {
   NOT: [ApplicationWhereInput!]
   id: IDFilter
   fullName: StringFilter
-  birthDate: CalendarDayFilter
-  gender: StringFilter
-  marriageStatus: StringFilter
+  birthDate: CalendarDayNullableFilter
+  gender: StringNullableFilter
+  marriageStatus: StringNullableFilter
   email: StringFilter
   createdAt: DateTimeNullableFilter
 }
 
-input CalendarDayFilter {
+input CalendarDayNullableFilter {
   equals: CalendarDay
   in: [CalendarDay!]
   notIn: [CalendarDay!]
@@ -888,7 +903,7 @@ input CalendarDayFilter {
   lte: CalendarDay
   gt: CalendarDay
   gte: CalendarDay
-  not: CalendarDayFilter
+  not: CalendarDayNullableFilter
 }
 
 input ApplicationOrderByInput {

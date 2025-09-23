@@ -1,6 +1,6 @@
 import { list } from "@keystone-6/core";
 import { allowAll } from "@keystone-6/core/access";
-import { text, image, timestamp } from "@keystone-6/core/fields";
+import { text, image, timestamp, relationship } from "@keystone-6/core/fields";
 import { document } from "@keystone-6/fields-document";
 import path from "path";
 // import your blocks
@@ -10,6 +10,7 @@ export default list({
   ui: {
     label: "اخبار",
     description: "تمام اخبار ",
+    labelField: "titleFa",
     listView: {
       pageSize: 20,
       initialColumns: ["titleFa", "date", "file"],
@@ -18,7 +19,7 @@ export default list({
   },
   access: allowAll,
   fields: {
-    titleFa: text({ label: "عنوان به فارسی" }),
+    titleFa: text({ label: "عنوان به فارسی", validation: { isRequired: true } }),
     titleEn: text({ label: "عنوان به انگلیسی" }),
 
     summaryFa: text({
@@ -81,5 +82,29 @@ export default list({
     date: timestamp({ label: "تاریخ", validation: { isRequired: true } }),
 
     file: image({ label: "تصویر اصلی خبر", storage: "news_images" }),
+    // Self one-to-one relation: visible side
+    relatedReport: relationship({
+      label: "خبر مرتبط",
+      ref: "Report.relatedReportOf",
+      many: false,
+      ui: {
+        displayMode: "cards",
+        cardFields: ["titleFa", "date"],
+        inlineConnect: true,
+        linkToItem: true,
+        removeMode: "disconnect",
+      },
+    }),
+    // Self one-to-one relation: hidden inverse side to satisfy Prisma
+    relatedReportOf: relationship({
+      ref: "Report.relatedReport",
+      many: false,
+      ui: {
+        labelField: 'titleFa',
+        createView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "hidden" },
+      },
+      graphql: { omit: true },
+    }),
   },
 });

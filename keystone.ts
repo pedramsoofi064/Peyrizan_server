@@ -23,6 +23,12 @@ export default withAuth(
       provider: "sqlite",
       url: "file:./keystone.db",
     },
+    server: {
+      cors: {
+        origin: ["http://localhost:3003"], // your Vite dev URL
+        credentials: true, // if you send cookies
+      },
+    },
     storage: {
       main_images: {
         // Images that use this store will be stored on the local machine
