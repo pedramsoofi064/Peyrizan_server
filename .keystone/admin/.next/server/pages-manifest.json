@@ -2,8 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/applications": "pages/applications.js",
-  "/machines/[id]": "pages/machines/[id].js",
   "/machines/create": "pages/machines/create.js",
+  "/machines/[id]": "pages/machines/[id].js",
   "/machines": "pages/machines.js"
 }
